@@ -1,4 +1,4 @@
-# Timer for NVDA 0.1.0-alpha
+# Timer for NVDA 0.2.0-alpha
 Brings timer and stopwatch functionalities right to NVDA
 
 ## download

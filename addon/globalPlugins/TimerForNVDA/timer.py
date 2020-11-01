@@ -34,7 +34,6 @@ class Timer:
         self._currentTime = 0
         self._targetTime = 0
         self._status = TimerStatus.STOPPED
-        self._running = False
 
     def registerReporter(self, func):
         for f in self._reporters:
@@ -55,7 +54,7 @@ class Timer:
         return self._mode.name
 
     def isRunning(self):
-        return self._running
+        return not self._status == TimerStatus.STOPPED
 
     def reportStatus(self, func):
         func(self._currentTime, self._targetTime, self._timeUnit, self._mode)
@@ -65,7 +64,7 @@ class Timer:
 
     def startTimer(self, initialTime, timeUnit):
         if self._shouldStart():
-            self._running = True
+            self._status = TimerStatus.STARTED
             self._shouldRun = True
             self._thread = threading.Thread(
                 target=self._timer, args=(initialTime,))
@@ -73,7 +72,10 @@ class Timer:
             self._report(TimerEvent.STARTED)
 
     def pause(self):
+        if self._thread is None:
+            return
         self._shouldRun = False
+        self._status = TimerStatus.PAUSED
 
     def stop(self):
         if self._thread is None:
@@ -144,19 +146,17 @@ beepDurations = {
 }
 
 
-def _reportWithSpeech(evt):
+def reportWithSpeech(evt):
     if evt["type"] == TimerEvent.TICK:
         ui.message(str(evt["currentTime"]))
 
 
-def _reportWithSound(evt):
+def reportWithSound(evt):
     if evt["type"] == TimerEvent.TICK:
         tones.beep(4000, beepDurations[evt["timeUnit"]])
 
 
 timer = Timer()
-timer.registerReporter(_reportWithSpeech)
-timer.registerReporter(_reportWithSound)
 
 
 def makeTime(currentTime, timeUnit):

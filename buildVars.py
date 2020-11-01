@@ -22,7 +22,7 @@ addon_info = {
     "addon_description": _("""This addon brings a fast, functional ande simple implementation of timer and stopwatch to be used with NVDA.
 Start a timer or stopwatch, using the time unit and reporting modes you need"""),
     # version
-    "addon_version": "0.1.0-alpha",
+    "addon_version": "0.2.0-alpha",
     # Author(s)
     "addon_author": u"Marlon Brandão de Sousa <marlon.bsousa@gmail.com>",
     # URL for the add-on documentation support

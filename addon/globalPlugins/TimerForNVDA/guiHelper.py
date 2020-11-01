@@ -11,7 +11,7 @@ from enum import Enum, unique
 import gui
 import locale
 from gui import guiHelper
-from .timer import timer, getStatus
+from .timer import getStatus, reportWithSound, reportWithSpeech, timer
 from .types import getOperationModes, getTimeUnits, TimerEvent
 import string
 import ui
@@ -103,9 +103,11 @@ class FastTimerDialog(wx.Dialog):
         self._pauseButton.Enable(timer.isRunning())
         self._operationModeCTRL.Enable(not timer.isRunning())
         self._timeUnitCTRL.Enable(not timer.isRunning())
-        self._reportWithSoundCheckbox.Enable(not timer.isRunning())
-        self._reportWithSpeechCheckbox.Enable(not timer.isRunning())
         self._timerValueCtrl.SetEditable(not timer.isRunning())
+        if not self._startButton.IsEnabled():
+            self._stopButton.SetFocus()
+        elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl:
+            self._startButton.SetFocus()
 
     def OnKeyPress(self, evt):
         key = evt.GetKeyCode()
@@ -115,10 +117,16 @@ class FastTimerDialog(wx.Dialog):
             evt.Skip()
 
     def OnReportWithSoundChanged(self, evt):
-        pass
+        if evt.IsChecked():
+            timer.registerReporter(reportWithSound)
+        else:
+            timer.unregisterReport(reportWithSound)
 
     def OnReportWithSpeechChanged(self, evt):
-        pass
+        if evt.IsChecked():
+            timer.registerReporter(reportWithSpeech)
+        else:
+            timer.unregisterReport(reportWithSpeech)
 
     def OnStart(self, evt):
         timer.startTimer(int(self._timerValueCtrl.GetValue()), self._timeUnit)
