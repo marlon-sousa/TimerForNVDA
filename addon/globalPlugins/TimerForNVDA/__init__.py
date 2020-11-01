@@ -1,4 +1,4 @@
-from .guiHelper import FastTimerDialog
+from .guiHelper import TimerDialog
 import globalPluginHandler
 import gui
 from scriptHandler import script
@@ -9,12 +9,11 @@ import versionInfo
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
-    @script(gesture="kb:NVDA+control+n")
-    def script_announceNVDAVersion(self, gesture):
+    @script(gesture="kb:NVDA+control+shift+t")
+    def script_showTimerDialog(self, gesture):
         def run():
             gui.mainFrame.prePopup()
-            d = FastTimerDialog(gui.mainFrame)
+            d = TimerDialog(gui.mainFrame)
             d.ShowModal()
             gui.mainFrame.postPopup()
         wx.CallAfter(run)
-        ui.message(versionInfo.version)

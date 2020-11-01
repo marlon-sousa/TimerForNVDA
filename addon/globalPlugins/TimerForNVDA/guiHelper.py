@@ -18,14 +18,14 @@ import ui
 import wx
 
 
-class FastTimerDialog(wx.Dialog):
+class TimerDialog(wx.Dialog):
     """A dialog used to manager timer and stop watch.
     """
 
     def __init__(self, parent):
         # Translators: Title of a dialog to find text.
-        super(FastTimerDialog, self).__init__(
-            parent, wx.ID_ANY, _("Fast Timer"))
+        super(TimerDialog, self).__init__(
+            parent, wx.ID_ANY, _("Timer for NVDA"))
 
         # current operation mode
         self._operationMode = timer._mode
