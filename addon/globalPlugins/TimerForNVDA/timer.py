@@ -62,6 +62,10 @@ class Timer:
     def isTimer(self):
         return self._mode == OperationMode.TIMER
 
+    def setTimeUnitFromValue(self, value):
+        if not self.isRunning():
+            self._timeUnit = TimeUnit(value)
+
     def startTimer(self, initialTime, timeUnit):
         if self._shouldStart():
             self._status = TimerStatus.STARTED

@@ -9,6 +9,7 @@ import config
 import core
 from enum import Enum, unique
 import gui
+from logHandler import log
 import locale
 from gui import guiHelper
 from .timer import getStatus, reportWithSound, reportWithSpeech, timer
@@ -78,6 +79,7 @@ class TimerDialog(wx.Dialog):
         self._stopButton.Bind(wx.EVT_BUTTON, self.OnStop)
         self._pauseButton.Bind(wx.EVT_BUTTON, self.OnPause)
         self._timerValueCtrl.Bind(wx.EVT_CHAR, self.OnKeyPress)
+        self._timeUnitCTRL.Bind(wx.EVT_RADIOBOX, self.OnTimeUnitChanged)
         self._reportWithSoundCheckbox.Bind(
             wx.EVT_CHECKBOX, self.OnReportWithSoundChanged)
         self._reportWithSpeechCheckbox.Bind(
@@ -115,6 +117,10 @@ class TimerDialog(wx.Dialog):
         if key == 8 or key > 256 or character == locale.localeconv()["decimal_point"] or character in string.digits:
             wx.CallAfter(self._refreshUI)
             evt.Skip()
+
+    def OnTimeUnitChanged(self, evt):
+        opt = evt.GetString()
+        timer.setTimeUnitFromValue(opt)
 
     def OnReportWithSoundChanged(self, evt):
         if evt.IsChecked():
