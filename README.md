@@ -26,4 +26,4 @@ Press CTRL + NVDA + Shift + T to open the timer dialog.
 
 # Contributing and translating
 
-If you want to contribute or translate this addon, please access the [project repository](https://github.com/marlon-sousa/EnhancedDictionaries) and find instructions on the contributing.md in the english documentation directory
+If you want to contribute or translate this addon, please access the [project repository](https://github.com/marlon-sousa/TimerForNVDA) and find instructions on the contributing.md in the english documentation directory
