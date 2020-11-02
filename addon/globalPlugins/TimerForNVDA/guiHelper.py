@@ -99,7 +99,7 @@ class TimerDialog(wx.Dialog):
 
     def _refreshUI(self):
         self._startButton.Enable(not timer.isRunning(
-        ) and self._timerValueCtrl.GetValue() != "")
+        ) and self._timerValueCtrl.GetValue() != "" and float(self._timerValueCtrl.GetValue()) != 0)
         self._stopButton.Enable(timer.isRunning())
         self._pauseButton.Enable(timer.isRunning())
         self._operationModeCTRL.Enable(not timer.isRunning())
