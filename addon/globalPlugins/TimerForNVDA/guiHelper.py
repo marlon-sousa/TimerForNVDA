@@ -30,7 +30,6 @@ class TimerDialog(wx.Dialog):
 
         # current operation mode
         self._operationMode = timer._mode
-        self._timeUnit = timer._timeUnit
 
         self._buildGui()
         self._bindEvents()
@@ -111,6 +110,13 @@ class TimerDialog(wx.Dialog):
         elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl:
             self._startButton.SetFocus()
 
+    def _getTimerValueCtrlLabel(self):
+        # the TimerValueCtrl control is created by using NVDA guiHelper.BoxSizerHelper.addLabeledControl function
+        # The problem with this is that BoxSizerHelper does not offer a way of retrieving either a reference for the label or even the id associated with the control
+        # as a result, we can't change label content easily.
+        # what we will do is we will get the TimerValueCtrl previous sibling control that happens to be its label, so we can change its content if needed
+        return self._timerValueCtrl.GetPrevSibling()
+
     def OnKeyPress(self, evt):
         key = evt.GetKeyCode()
         character = chr(key)
@@ -121,6 +127,7 @@ class TimerDialog(wx.Dialog):
     def OnTimeUnitChanged(self, evt):
         opt = evt.GetString()
         timer.setTimeUnitFromValue(opt)
+        self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
 
     def OnReportWithSoundChanged(self, evt):
         if evt.IsChecked():
@@ -135,21 +142,28 @@ class TimerDialog(wx.Dialog):
             timer.unregisterReport(reportWithSpeech)
 
     def OnStart(self, evt):
-        timer.startTimer(int(self._timerValueCtrl.GetValue()), self._timeUnit)
+        timer.startTimer(int(self._timerValueCtrl.GetValue()))
 
     def OnStop(self, evt):
         timer.stop()
 
     def OnPause(self, evt):
-        pass
+        if timer.isPaused():
+            timer.resume()
+        else:
+            timer.pause()
 
     def OnTimer(self, evt):
         if evt["type"] in [TimerEvent.STARTED, TimerEvent.STOPPED]:
             self._refreshUI()
             return
-        if evt["type"] == TimerEvent.COUNTER:
+        if evt["type"] == TimerEvent.PAUSED:
+            self._pauseButton.SetLabel(_("Resume"))
+        elif evt["type"] == TimerEvent.RESUMED:
+            self._pauseButton.SetLabel(_("Pause"))
+        elif evt["type"] == TimerEvent.COUNTER:
             self._statusBar.SetStatusText(
                 getStatus())
 
     def _getTimerConfigLabel(self):
-        return f"amount of {self._timeUnit.value} for {self._operationMode.value}"
+        return f"amount of {timer._timeUnit.value} for {self._operationMode.value}"
