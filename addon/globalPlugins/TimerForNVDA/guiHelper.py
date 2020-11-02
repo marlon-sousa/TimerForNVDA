@@ -146,8 +146,10 @@ class TimerDialog(wx.Dialog):
     def OnTimer(self, evt):
         if evt["type"] in [TimerEvent.STARTED, TimerEvent.STOPPED]:
             self._refreshUI()
-        self._statusBar.SetStatusText(
-            getStatus())
+            return
+        if evt["type"] == TimerEvent.COUNTER:
+            self._statusBar.SetStatusText(
+                getStatus())
 
     def _getTimerConfigLabel(self):
         return f"amount of {self._timeUnit.value} for {self._operationMode.value}"

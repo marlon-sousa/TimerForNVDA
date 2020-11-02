@@ -124,6 +124,7 @@ class Timer:
             time.sleep(1)
             log.debug("contandito")
             self._counter -= 1
+            self._report(TimerEvent.COUNTER)
             if self._counter % getTime(self._timeUnit) == 0:
                 self._decrementCurrentTime()
                 self._report(TimerEvent.TICK)
@@ -162,16 +163,34 @@ def reportWithSound(evt):
 
 timer = Timer()
 
+timePhases = {
+    TimeUnit.SECONDS.name: 1,
+    TimeUnit.MINUTES.name: 2,
+    TimeUnit.HOURS: 3
+}
+
 
 def makeTime(currentTime, timeUnit):
-    if currentTime == 1:
-        return f"1 {getSingularTimeUnit(timeUnit)}"
-    return f"{currentTime} {timeUnit.name}"
+    phases = timePhases[timeUnit.name]
+    times = []
+    cont = 0
+    x = currentTime
+    while cont < phases:
+        x, r = divmod(x, 60)
+        times.append("{0:0>2}".format(r))
+        cont += 1
+
+    times.reverse()
+    formatedTime = ":".join(times)
+
+    if int(times[0]) < 2:
+        return f"{formatedTime} {getSingularTimeUnit(timeUnit)}"
+    return f"{formatedTime} {timeUnit.name}"
 
 
 def getStatus():
     if not timer.isRunning():
         return f"{timer._mode.name}: {_('stopped')}"
     if timer.isTimer():
-        return f"{timer._mode.name}: {makeTime(timer._currentTime, timer._timeUnit)} to finish"
-    return f"{timer._mode.name}: {makeTime(timer._currentTime, timer._timeUnit)} elapsed."
+        return f"{timer._mode.name}: {makeTime(timer._counter, timer._timeUnit)} to finish"
+    return f"{timer._mode.name}: {makeTime(timer._counter, timer._timeUnit)} elapsed."

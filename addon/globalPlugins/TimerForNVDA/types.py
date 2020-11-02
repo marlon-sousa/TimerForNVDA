@@ -26,6 +26,7 @@ class TimerEvent(Enum):
     STOPPED = auto()
     PAUSED = auto()
     TICK = auto()
+    COUNTER = auto()
 
 
 @unique
