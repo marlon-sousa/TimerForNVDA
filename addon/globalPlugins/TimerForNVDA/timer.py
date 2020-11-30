@@ -175,6 +175,8 @@ def reportWithSpeech(evt):
 def reportWithSound(evt):
     if evt["type"] == TimerEvent.TICK:
         tones.beep(4000, beepDurations[evt["timeUnit"]])
+    elif evt["type"] == TimerEvent.STOPPED:
+        tones.beep(660, 400)
 
 
 timer = Timer()
