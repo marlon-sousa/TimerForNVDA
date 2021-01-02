@@ -29,6 +29,7 @@ class TimerEvent(Enum):
     TICK = auto()
     COUNTER = auto()
     COMPLETED = auto()
+    WARNING = auto()
 
 
 @unique
