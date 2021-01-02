@@ -12,7 +12,7 @@ import gui
 from logHandler import log
 import locale
 from gui import guiHelper
-from .timer import getStatus, reportWithSound, reportWithSpeech, timer
+from .timer import getStatus, reportWithSound, reportWithSpeech, reportTimeCompletion, timer
 from .types import getOperationModes, getTimeUnits, TimerEvent
 import string
 import ui

@@ -8,6 +8,8 @@
 import config
 import core
 from logHandler import log
+import nvwave
+import os
 import threading
 import time
 import tones
@@ -146,6 +148,7 @@ class Timer:
                 self._decrementCurrentTime()
                 self._report(TimerEvent.TICK)
             if self._currentTime == 0:
+                self._report(TimerEvent.COMPLETED)
                 self.stop()
                 break
 
@@ -167,6 +170,16 @@ beepDurations = {
 }
 
 
+def getSoundsPath():
+    soundsPath = os.path.join(os.path.abspath(
+        os.path.dirname(__file__)), "..", "..", "sounds")
+    return soundsPath
+
+
+def playAlarm():
+    nvwave.playWaveFile(os.path.join(getSoundsPath(), "timer.wav"))
+
+
 def reportWithSpeech(evt):
     if evt["type"] == TimerEvent.TICK:
         ui.message(str(evt["currentTime"]))
@@ -177,7 +190,13 @@ def reportWithSound(evt):
         tones.beep(4000, beepDurations[evt["timeUnit"]])
 
 
+def reportTimeCompletion(evt):
+    if evt["type"] == TimerEvent.COMPLETED:
+        playAlarm()
+
+
 timer = Timer()
+timer.registerReporter(reportTimeCompletion)
 
 timePhases = {
     TimeUnit.SECONDS.name: 1,
