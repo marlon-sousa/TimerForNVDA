@@ -37,6 +37,7 @@ class Timer:
         self._currentTime = 0
         self._targetTime = 0
         self._status = TimerStatus.STOPPED
+        self._message = ""
 
     def registerReporter(self, func):
         for f in self._reporters:
