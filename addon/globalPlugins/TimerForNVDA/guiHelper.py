@@ -60,8 +60,7 @@ class TimerDialog(wx.Dialog):
             wx.CheckBox(self, id=wx.ID_ANY, label=_("Report progress with speech")))
         mainHelper.addItem(feedbackHelper)
         dialogActions = guiHelper.ButtonHelper(wx.HORIZONTAL)
-        self._okButton = dialogActions.addButton(self, label=_("Ok"))
-        self._cancelButton = dialogActions.addButton(self, label=_("Cancel"))
+        self._closeButton = dialogActions.addButton(self, label=_("Close"))
         mainHelper.addItem(dialogActions)
         self._statusBar = wx.StatusBar(self, id=wx.ID_ANY)
         self._statusBar.SetStatusText(
@@ -83,7 +82,13 @@ class TimerDialog(wx.Dialog):
             wx.EVT_CHECKBOX, self.OnReportWithSoundChanged)
         self._reportWithSpeechCheckbox.Bind(
             wx.EVT_CHECKBOX, self.OnReportWithSpeechChanged)
+        self._closeButton.Bind(wx.EVT_BUTTON, self.OnClose)
+        self.Bind(wx.EVT_CLOSE, self.OnClose)
         timer.registerReporter(self.OnTimer)
+
+    def OnClose(self, event):
+        timer.unregisterReport(self.OnTimer)
+        self.Destroy()
 
     def _setDefaultValues(self):
         self._timeUnitCTRL.SetSelection(self._getIndex(
@@ -148,10 +153,7 @@ class TimerDialog(wx.Dialog):
         timer.stop()
 
     def OnPause(self, evt):
-        if timer.isPaused():
-            timer.resume()
-        else:
-            timer.pause()
+        timer.toggleOperation()
 
     def OnTimer(self, evt):
         if evt["type"] in [TimerEvent.STARTED, TimerEvent.STOPPED]:

@@ -24,6 +24,7 @@ class Timer:
 
     def __init__(self):
         self._resetState()
+        self._initialTime = None
         self._running = False
         self._shouldRun = False
         self._thread = None
@@ -36,6 +37,7 @@ class Timer:
         self._currentTime = 0
         self._targetTime = 0
         self._status = TimerStatus.STOPPED
+        self._message = ""
 
     def registerReporter(self, func):
         for f in self._reporters:
@@ -71,15 +73,26 @@ class Timer:
         if not self.isRunning():
             self._timeUnit = TimeUnit(value)
 
-    def startTimer(self, initialTime):
-        if self._shouldStart():
+    def startTimer(self, initialTime=None):
+        if self._shouldStart(initialTime):
             self._status = TimerStatus.STARTED
-            self._currentTime = initialTime
+            # save initialTime if provided
+            # this is useful because if we are starting timer dialogless we will reuse last initial time configured
+            if initialTime:
+                self._initialTime = initialTime
+            self._currentTime = self._initialTime
             self._run()
             self._report(TimerEvent.STARTED)
 
+    def toggleOperation(self):
+        if self.isPaused():
+            self.resume()
+        else:
+            self.pause()
+
     def pause(self):
-        if self._thread is None:
+        if self._thread is None or not self.isRunning():
+            self.warn(_("can not pause timer because it is not running"))
             return
         self._shouldRun = False
         if self._thread != threading.current_thread() and self._thread.is_alive():
@@ -88,6 +101,9 @@ class Timer:
         self._report(TimerEvent.PAUSED)
 
     def resume(self):
+        if not self.isPaused():
+            self.warn(_("Can not resumer because timer is not paused"))
+            return
         self._status = TimerStatus.STARTED
         self._run()
         self._report(TimerEvent.RESUMED)
@@ -107,7 +123,14 @@ class Timer:
             target=(self._timer if self._mode == OperationMode.TIMER else self._stopWatch))
         self._thread.start()
 
-    def _shouldStart(self):
+    def warn(self, warning):
+        self._message = warning
+        self._report(TimerEvent.WARNING)
+
+    def _shouldStart(self, initialTime):
+        if not initialTime and not self._initialTime:
+            self.warn(_("Initial time not configured. starting aborted"))
+            return False
         return self._thread is None or self._thread and not self._thread.is_alive()
 
     def _shouldStop(self):
@@ -129,6 +152,7 @@ class Timer:
                 "currentTime": self._currentTime,
                 "timeUnit": self._timeUnit.value,
                 "watchType": self._mode.value,
+                "message": self._message,
                 "status": self._status,
             })
 
@@ -181,12 +205,12 @@ def playAlarm():
 
 
 def reportWithSpeech(evt):
-    if evt["type"] == TimerEvent.TICK:
+    if evt["type"] == TimerEvent.TICK and evt["currentTime"] != 0:
         ui.message(str(evt["currentTime"]))
 
 
 def reportWithSound(evt):
-    if evt["type"] == TimerEvent.TICK:
+    if evt["type"] == TimerEvent.TICK and evt["currentTime"] != 0:
         tones.beep(4000, beepDurations[evt["timeUnit"]])
 
 
@@ -195,8 +219,14 @@ def reportTimeCompletion(evt):
         playAlarm()
 
 
+def reportMessages(evt):
+    if evt["type"] == TimerEvent.WARNING:
+        ui.message(f"{_('warning: ')} {evt['message']}")
+
+
 timer = Timer()
 timer.registerReporter(reportTimeCompletion)
+timer.registerReporter(reportMessages)
 
 timePhases = {
     TimeUnit.SECONDS.name: 1,

@@ -9,4 +9,5 @@ addon/doc/**/*.md
 *.pot
 *.py[co]
 *.nvda-addon
+.vscode
 .sconsign.dblite
