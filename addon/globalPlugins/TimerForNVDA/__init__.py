@@ -5,7 +5,6 @@ from scriptHandler import script
 from .timer import getStatus, timer
 import ui
 import wx
-import versionInfo
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):

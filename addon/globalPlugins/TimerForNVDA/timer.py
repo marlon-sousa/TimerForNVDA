@@ -5,7 +5,7 @@
 # See the file COPYING.txt for more details.
 
 
-import config
+from . import conf
 import core
 from logHandler import log
 import nvwave
@@ -19,6 +19,8 @@ import ui
 
 timerRunning = False
 
+timer = None
+
 
 class Timer:
 
@@ -28,8 +30,8 @@ class Timer:
         self._running = False
         self._shouldRun = False
         self._thread = None
-        self._mode = OperationMode.TIMER
-        self._timeUnit = TimeUnit.SECONDS
+        self._mode = OperationMode[conf.getConfig("operationMode")]
+        self._timeUnit = TimeUnit[conf.getConfig("timeUnit")]
         self._reporters = []
         self._counterLock = threading.Lock()
 
@@ -45,7 +47,7 @@ class Timer:
                 return
         self._reporters.append(func)
 
-    def unregisterReport(self, func):
+    def unregisterReporter(self, func):
         try:
             self._reporters.remove(func)
         except:
@@ -224,9 +226,16 @@ def reportMessages(evt):
         ui.message(f"{_('warning: ')} {evt['message']}")
 
 
-timer = Timer()
-timer.registerReporter(reportTimeCompletion)
-timer.registerReporter(reportMessages)
+def initializeTimer():
+    global timer
+    log.debug("enttrroooiouuuoiouo")
+    if not timer is None:
+        log.debug("saiiiuuuuaaauaiauaiaue")
+        return
+    timer = Timer()
+    timer.registerReporter(reportTimeCompletion)
+    timer.registerReporter(reportMessages)
+
 
 timePhases = {
     TimeUnit.SECONDS.name: 1,
@@ -234,6 +243,7 @@ timePhases = {
     TimeUnit.HOURS: 3
 }
 
+initializeTimer()
 
 def makeTime(currentTime, timeUnit):
     phases = timePhases[timeUnit.name]

@@ -4,8 +4,7 @@
 # This file is covered by the GNU General Public License.
 # See the file COPYING.txt for more details.
 
-
-import config
+from . import conf
 import core
 from enum import Enum, unique
 import gui
@@ -13,7 +12,7 @@ from logHandler import log
 import locale
 from gui import guiHelper
 from .timer import getStatus, reportWithSound, reportWithSpeech, reportTimeCompletion, timer
-from .types import getOperationModes, getTimeUnits, TimerEvent
+from .types import TimeUnit, getOperationModes, getTimeUnits, TimerEvent
 import string
 import ui
 import wx
@@ -42,13 +41,12 @@ class TimerDialog(wx.Dialog):
         feedbackHelper = guiHelper.BoxSizerHelper(
             self, orientation=wx.HORIZONTAL)
         self._timerValueCtrl = timerHelper.addLabeledControl(
-            self._getTimerConfigLabel(), wx.TextCtrl)
+            "", wx.TextCtrl)
         self._timeUnitCTRL = timerHelper.addItem(wx.RadioBox(self, label=_(
             "Time unit"), choices=getTimeUnits(), majorDimension=1, style=wx.RA_SPECIFY_ROWS))
         mainHelper.addItem(timerHelper)
         self._operationModeCTRL = mainHelper.addLabeledControl(
             _("Type of watch"), wx.Choice, id=wx.ID_ANY, choices=getOperationModes())
-        self._setDefaultValues()
         timerActions = guiHelper.ButtonHelper(wx.HORIZONTAL)
         self._startButton = timerActions.addButton(self, label=_("start"))
         self._pauseButton = timerActions.addButton(self, label=_("Pause"))
@@ -60,12 +58,17 @@ class TimerDialog(wx.Dialog):
             wx.CheckBox(self, id=wx.ID_ANY, label=_("Report progress with speech")))
         mainHelper.addItem(feedbackHelper)
         dialogActions = guiHelper.ButtonHelper(wx.HORIZONTAL)
-        self._closeButton = dialogActions.addButton(self, label=_("Close"))
+        self._closeButton = dialogActions.addButton(
+            self, label=_("Close"), id=wx.ID_CANCEL)
         mainHelper.addItem(dialogActions)
         self._statusBar = wx.StatusBar(self, id=wx.ID_ANY)
         self._statusBar.SetStatusText(
             getStatus())
         mainHelper.addItem(self._statusBar, flag=wx.EXPAND)
+        self._setInitialValues()
+        self._configureReporter(self._reportWithSoundCheckbox, reportWithSound)
+        self._configureReporter(
+            self._reportWithSpeechCheckbox, reportWithSpeech)
         self._refreshUI()
         mainSizer.Add(mainHelper.sizer, border=10, flag=wx.ALL)
         mainSizer.Fit(self)
@@ -87,14 +90,19 @@ class TimerDialog(wx.Dialog):
         timer.registerReporter(self.OnTimer)
 
     def OnClose(self, event):
-        timer.unregisterReport(self.OnTimer)
+        timer.unregisterReporter(self.OnTimer)
         self.Destroy()
 
-    def _setDefaultValues(self):
+    def _setInitialValues(self):
         self._timeUnitCTRL.SetSelection(self._getIndex(
-            getTimeUnits(), timer._timeUnit.value))
+            getTimeUnits(), TimeUnit[conf.getConfig("timeUnit")].value))
         self._operationModeCTRL.SetSelection(self._getIndex(
             getOperationModes(), timer._mode.value))
+        self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
+        self._reportWithSoundCheckbox.SetValue(
+            conf.getConfig("reportWithSound"))
+        self._reportWithSpeechCheckbox.SetValue(
+            conf.getConfig("reportWithSpeech"))
 
     def _getIndex(self, items, item):
         for i, _ in enumerate(items):
@@ -115,12 +123,24 @@ class TimerDialog(wx.Dialog):
         elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl:
             self._startButton.SetFocus()
 
+    def _configureReporter(self, ctrl, reporter):
+        if ctrl.IsChecked():
+            timer.registerReporter(reporter)
+        else:
+            timer.unregisterReporter(reporter)
+
     def _getTimerValueCtrlLabel(self):
         # the TimerValueCtrl control is created by using NVDA guiHelper.BoxSizerHelper.addLabeledControl function
         # The problem with this is that BoxSizerHelper does not offer a way of retrieving either a reference for the label or even the id associated with the control
         # as a result, we can't change label content easily.
         # what we will do is we will get the TimerValueCtrl previous sibling control that happens to be its label, so we can change its content if needed
         return self._timerValueCtrl.GetPrevSibling()
+
+    def _configureTimer(self):
+        timer.setTimeUnitFromValue(self._timeUnitCTRL.GetStringSelection())
+
+    def _persistConfiguration(self):
+        conf.setConfig("timeUnit", timer._timeUnit.name)
 
     def OnKeyPress(self, evt):
         key = evt.GetKeyCode()
@@ -130,23 +150,23 @@ class TimerDialog(wx.Dialog):
             evt.Skip()
 
     def OnTimeUnitChanged(self, evt):
-        opt = evt.GetString()
-        timer.setTimeUnitFromValue(opt)
         self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
 
     def OnReportWithSoundChanged(self, evt):
-        if evt.IsChecked():
-            timer.registerReporter(reportWithSound)
-        else:
-            timer.unregisterReport(reportWithSound)
+        self._configureReporter(self._reportWithSoundCheckbox, reportWithSound)
+        conf.setConfig("reportWithSound",
+                       self._reportWithSoundCheckbox.IsChecked())
 
     def OnReportWithSpeechChanged(self, evt):
-        if evt.IsChecked():
-            timer.registerReporter(reportWithSpeech)
-        else:
-            timer.unregisterReport(reportWithSpeech)
+        self._configureReporter(
+            self._reportWithSpeechCheckbox, reportWithSpeech)
+        conf.setConfig("reportWithSpeech",
+                       self._reportWithSpeechCheckbox.IsChecked())
 
     def OnStart(self, evt):
+        self._configureTimer()
+        self._persistConfiguration()
+
         timer.startTimer(int(self._timerValueCtrl.GetValue()))
 
     def OnStop(self, evt):
@@ -168,4 +188,4 @@ class TimerDialog(wx.Dialog):
                 getStatus())
 
     def _getTimerConfigLabel(self):
-        return f"amount of {timer._timeUnit.value} for {self._operationMode.value}"
+        return f"amount of {self._timeUnitCTRL.GetStringSelection()} for {self._operationMode.value}"
