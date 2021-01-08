@@ -228,9 +228,7 @@ def reportMessages(evt):
 
 def initializeTimer():
     global timer
-    log.debug("enttrroooiouuuoiouo")
     if not timer is None:
-        log.debug("saiiiuuuuaaauaiauaiaue")
         return
     timer = Timer()
     timer.registerReporter(reportTimeCompletion)
@@ -244,6 +242,7 @@ timePhases = {
 }
 
 initializeTimer()
+
 
 def makeTime(currentTime, timeUnit):
     phases = timePhases[timeUnit.name]
