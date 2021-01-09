@@ -5,7 +5,7 @@ ADDON_CONFIG = "timerForNVDA"
 
 def initConfiguration():
     confspec = {
-        "reportWithSound": "boolean( default=False)",
+        "reportWithSound": "boolean( default=True)",
         "reportWithSpeech": "boolean( default=False)",
         "operationMode": "string( default=TIMER)",
         "timeUnit": "string( default=SECONDS)",
