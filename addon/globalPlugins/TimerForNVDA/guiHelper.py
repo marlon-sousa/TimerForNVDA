@@ -12,7 +12,7 @@ from logHandler import log
 import locale
 from gui import guiHelper
 from .timer import getStatus, reportWithSound, reportWithSpeech, reportTimeCompletion, timer
-from .types import TimeUnit, getOperationModes, getTimeUnits, TimerEvent
+from .types import OperationMode, TimeUnit, getOperationModes, getTimeUnits, TimerEvent
 import string
 import ui
 import wx
@@ -26,9 +26,6 @@ class TimerDialog(wx.Dialog):
         # Translators: Title of a dialog to find text.
         super(TimerDialog, self).__init__(
             parent, wx.ID_ANY, _("Timer for NVDA"))
-
-        # current operation mode
-        self._operationMode = timer._mode
 
         self._buildGui()
         self._bindEvents()
@@ -66,9 +63,6 @@ class TimerDialog(wx.Dialog):
             getStatus())
         mainHelper.addItem(self._statusBar, flag=wx.EXPAND)
         self._setInitialValues()
-        self._configureReporter(self._reportWithSoundCheckbox, reportWithSound)
-        self._configureReporter(
-            self._reportWithSpeechCheckbox, reportWithSpeech)
         self._refreshUI()
         mainSizer.Add(mainHelper.sizer, border=10, flag=wx.ALL)
         mainSizer.Fit(self)
@@ -81,6 +75,8 @@ class TimerDialog(wx.Dialog):
         self._pauseButton.Bind(wx.EVT_BUTTON, self.OnPause)
         self._timerValueCtrl.Bind(wx.EVT_CHAR, self.OnKeyPress)
         self._timeUnitCTRL.Bind(wx.EVT_RADIOBOX, self.OnTimeUnitChanged)
+        self._operationModeCTRL.Bind(
+            wx.EVT_CHOICE, self.OnOperationModeChanged)
         self._reportWithSoundCheckbox.Bind(
             wx.EVT_CHECKBOX, self.OnReportWithSoundChanged)
         self._reportWithSpeechCheckbox.Bind(
@@ -97,7 +93,7 @@ class TimerDialog(wx.Dialog):
         self._timeUnitCTRL.SetSelection(self._getIndex(
             getTimeUnits(), TimeUnit[conf.getConfig("timeUnit")].value))
         self._operationModeCTRL.SetSelection(self._getIndex(
-            getOperationModes(), timer._mode.value))
+            getOperationModes(), OperationMode[conf.getConfig("operationMode")].value))
         self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
         self._reportWithSoundCheckbox.SetValue(
             conf.getConfig("reportWithSound"))
@@ -111,16 +107,18 @@ class TimerDialog(wx.Dialog):
         return -1
 
     def _refreshUI(self):
-        self._startButton.Enable(not timer.isRunning(
-        ) and self._timerValueCtrl.GetValue() != "" and float(self._timerValueCtrl.GetValue()) != 0)
+        self._startButton.Enable(not timer.isRunning() and (
+            self._operationModeIsStopWatch() or self._timerValueIsValid()))
         self._stopButton.Enable(timer.isRunning())
         self._pauseButton.Enable(timer.isRunning())
         self._operationModeCTRL.Enable(not timer.isRunning())
         self._timeUnitCTRL.Enable(not timer.isRunning())
-        self._timerValueCtrl.SetEditable(not timer.isRunning())
+        self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
+        self._timerValueCtrl.SetEditable(
+            not timer.isRunning() and self._operationModeIsTimer())
         if not self._startButton.IsEnabled():
             self._stopButton.SetFocus()
-        elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl:
+        elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl and self._operationModeIsTimer():
             self._startButton.SetFocus()
 
     def _configureReporter(self, ctrl, reporter):
@@ -128,6 +126,15 @@ class TimerDialog(wx.Dialog):
             timer.registerReporter(reporter)
         else:
             timer.unregisterReporter(reporter)
+
+    def _timerValueIsValid(self):
+        return self._timerValueCtrl.GetValue() != "" and float(self._timerValueCtrl.GetValue()) != 0
+
+    def _operationModeIsStopWatch(self):
+        return OperationMode(self._operationModeCTRL.GetStringSelection()) == OperationMode.STOP_WATCH
+
+    def _operationModeIsTimer(self):
+        return OperationMode(self._operationModeCTRL.GetStringSelection()) == OperationMode.TIMER
 
     def _getTimerValueCtrlLabel(self):
         # the TimerValueCtrl control is created by using NVDA guiHelper.BoxSizerHelper.addLabeledControl function
@@ -138,9 +145,12 @@ class TimerDialog(wx.Dialog):
 
     def _configureTimer(self):
         timer.setTimeUnitFromValue(self._timeUnitCTRL.GetStringSelection())
+        timer._mode = OperationMode(
+            self._operationModeCTRL.GetStringSelection())
 
     def _persistConfiguration(self):
         conf.setConfig("timeUnit", timer._timeUnit.name)
+        conf.setConfig("operationMode", timer._mode.name)
 
     def OnKeyPress(self, evt):
         key = evt.GetKeyCode()
@@ -151,6 +161,9 @@ class TimerDialog(wx.Dialog):
 
     def OnTimeUnitChanged(self, evt):
         self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
+
+    def OnOperationModeChanged(self, evt):
+        self._refreshUI()
 
     def OnReportWithSoundChanged(self, evt):
         self._configureReporter(self._reportWithSoundCheckbox, reportWithSound)
@@ -166,8 +179,9 @@ class TimerDialog(wx.Dialog):
     def OnStart(self, evt):
         self._configureTimer()
         self._persistConfiguration()
-
-        timer.startTimer(int(self._timerValueCtrl.GetValue()))
+        initialTime = int(self._timerValueCtrl.GetValue()
+                          ) if timer.isTimer() else None
+        timer.start(initialTime)
 
     def OnStop(self, evt):
         timer.stop()
@@ -188,4 +202,4 @@ class TimerDialog(wx.Dialog):
                 getStatus())
 
     def _getTimerConfigLabel(self):
-        return f"amount of {self._timeUnitCTRL.GetStringSelection()} for {self._operationMode.value}"
+        return f"amount of {self._timeUnitCTRL.GetStringSelection()} for {self._operationModeCTRL.GetStringSelection()}"

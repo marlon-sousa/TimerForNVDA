@@ -27,6 +27,7 @@ class Timer:
     def __init__(self):
         self._resetState()
         self._initialTime = None
+        self.stopWatchResult = None
         self._running = False
         self._shouldRun = False
         self._thread = None
@@ -71,11 +72,14 @@ class Timer:
     def isTimer(self):
         return self._mode == OperationMode.TIMER
 
+    def isStopWatch(self):
+        return self._mode == OperationMode.STOP_WATCH
+
     def setTimeUnitFromValue(self, value):
         if not self.isRunning():
             self._timeUnit = TimeUnit(value)
 
-    def startTimer(self, initialTime=None):
+    def _startTimer(self, initialTime=None):
         if self._shouldStart(initialTime):
             self._status = TimerStatus.STARTED
             # save initialTime if provided
@@ -85,6 +89,18 @@ class Timer:
             self._currentTime = self._initialTime
             self._run()
             self._report(TimerEvent.STARTED)
+
+    def _startStopWatch(self):
+        if self._shouldStart():
+            self._status = TimerStatus.STARTED
+            self._run()
+            self._report(TimerEvent.STARTED)
+
+    def start(self, initialTime=None):
+        if(self.isTimer()):
+            self._startTimer(initialTime)
+        else:
+            self._startStopWatch()
 
     def toggleOperation(self):
         if self.isPaused():
@@ -116,21 +132,24 @@ class Timer:
         self._shouldRun = False
         if self._thread != threading.current_thread() and self._thread.is_alive():
             self._thread.join()
+        if self.isStopWatch():
+            self.stopWatchResult = self._counter
+            self._report(TimerEvent.COMPLETED)
         self._report(TimerEvent.STOPPED)
         self._resetState()
 
     def _run(self):
         self._shouldRun = True
         self._thread = threading.Thread(
-            target=(self._timer if self._mode == OperationMode.TIMER else self._stopWatch))
+            target=(self._timer if self.isTimer() else self._stopWatch))
         self._thread.start()
 
     def warn(self, warning):
         self._message = warning
         self._report(TimerEvent.WARNING)
 
-    def _shouldStart(self, initialTime):
-        if not initialTime and not self._initialTime:
+    def _shouldStart(self, initialTime=None):
+        if self.isTimer() and not initialTime and not self._initialTime:
             self.warn(_("Initial time not configured. starting aborted"))
             return False
         return self._thread is None or self._thread and not self._thread.is_alive()
@@ -138,10 +157,9 @@ class Timer:
     def _shouldStop(self):
         return not self._shouldRun
 
-    def _incrementCurrentTime(self, counter):
-        if counter % getTime(self._timeUnit) == 0:
-            with self._counterLock:
-                self._currentTime = self._currentTime + 1
+    def _incrementCurrentTime(self):
+        with self._counterLock:
+            self._currentTime = self._currentTime + 1
 
     def _decrementCurrentTime(self):
         with self._counterLock:
@@ -161,13 +179,10 @@ class Timer:
     def _timer(self):
         self._targetTime = 0
         self._counter = self._currentTime * getTime(self._timeUnit)
-        log.debug(str(self._counter))
         while self._counter > self._targetTime:
             if self._shouldStop():
                 break
-            log.debug("vamos esperar")
             time.sleep(1)
-            log.debug("contandito")
             self._counter -= 1
             self._report(TimerEvent.COUNTER)
             if self._counter % getTime(self._timeUnit) == 0:
@@ -179,14 +194,16 @@ class Timer:
                 break
 
     def _stopWatch(self):
-        self.currentTime = 0
-        self._counter = 0
+        self._counter = self._currentTime * getTime(self._timeUnit)
         while True:
-            time.sleep(1)
-            self._counter += 1
-            self.incrementCurrentTime()
             if self._shouldStop():
                 break
+            time.sleep(1)
+            self._counter += 1
+            self._report(TimerEvent.COUNTER)
+            if self._counter % getTime(self._timeUnit) == 0:
+                self._incrementCurrentTime()
+                self._report(TimerEvent.TICK)
 
 
 beepDurations = {
@@ -218,12 +235,16 @@ def reportWithSound(evt):
 
 def reportTimeCompletion(evt):
     if evt["type"] == TimerEvent.COMPLETED:
-        playAlarm()
+        if timer.isTimer():
+            playAlarm()
 
 
 def reportMessages(evt):
     if evt["type"] == TimerEvent.WARNING:
         ui.message(f"{_('warning: ')} {evt['message']}")
+    elif evt["type"] == TimerEvent.COMPLETED:
+        if timer.isStopWatch():
+            ui.message(getStatus())
 
 
 def initializeTimer():
@@ -233,6 +254,10 @@ def initializeTimer():
     timer = Timer()
     timer.registerReporter(reportTimeCompletion)
     timer.registerReporter(reportMessages)
+    if conf.getConfig("reportWithSound"):
+        timer.registerReporter(reportWithSound)
+    if conf.getConfig("reportWithSpeech"):
+        timer.registerReporter(reportWithSpeech)
 
 
 timePhases = {
@@ -264,7 +289,10 @@ def makeTime(currentTime, timeUnit):
 
 def getStatus():
     if not timer.isRunning():
-        return f"{timer._mode.name}: {_('stopped')}"
+        status = _("stopped")
+        if timer.isStopWatch() and timer.stopWatchResult is not None:
+            status += f" {_('at')} {makeTime(timer.stopWatchResult, timer._timeUnit)}"
+        return f"{timer._mode.value}: {status}"
     if timer.isTimer():
-        return f"{timer._mode.name}: {makeTime(timer._counter, timer._timeUnit)} to finish{_(' (paused)') if timer.isPaused() else ''}"
-    return f"{timer._mode.name}: {makeTime(timer._counter, timer._timeUnit)} elapsed."
+        return f"{timer._mode.value}: {makeTime(timer._counter, timer._timeUnit)} to finish{_(' (paused)') if timer.isPaused() else ''}"
+    return f"{timer._mode.value}: {makeTime(timer._counter, timer._timeUnit)} elapsed{_(' (paused)') if timer.isPaused() else ''}"

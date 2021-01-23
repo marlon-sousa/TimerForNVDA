@@ -23,7 +23,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         if timer.isRunning():
             timer.stop()
         else:
-            timer.startTimer()
+            timer.start()
 
     @script(gesture="kb:NVDA+control+shift+p")
     def script_toggleTimer(self, gesture):
