@@ -220,6 +220,8 @@ class Timer:
             self._counter -= 1
             self._report(TimerEvent.COUNTER)
             if self._isTick():
+                self._currentTime = secondsToTime(
+                    self._counter, self._timeUnit, formatTime=False)
                 self._report(TimerEvent.TICK)
             if self._counter == 0:
                 self._report(TimerEvent.COMPLETED)
@@ -301,7 +303,28 @@ timePhases = {
 initializeTimer()
 
 
-def secondsToTime(currentTime, targetTimeUnit, reduceTime=True):
+def getReducedTime(units):
+    timeUnits = list(TimeUnit)
+    # remove trailing "00"
+    while True:
+        if units[0] != "00" or len(units) == 1:
+            break
+        units.pop(0)
+
+    # as we reduced time, the time unit needs to be recalculated (e.e 00:01:30 hours now became 01:30 minuts)
+    timeUnit = timeUnits[len(units) - 1]
+
+    # if sub units are zeroed, we also need to remove them
+    while True:
+        if units[-1] != "00" or len(units) == 1:
+            break
+        units.pop()
+
+    units[0] = units[0].lstrip("0")
+    return (units, timeUnit)
+
+
+def secondsToTime(currentTime, targetTimeUnit, reduceTime=True, formatTime=True):
     resultUnits = []
     resultTimeUnit = targetTimeUnit
     timeUnits = list(TimeUnit)
@@ -317,25 +340,17 @@ def secondsToTime(currentTime, targetTimeUnit, reduceTime=True):
         resultUnits.append("{0:0>2}".format(currentUnit))
         currentUnit = nextUnit
 
-    log.debug(str(resultUnits))
     # list is in order from seconds on. Revert it as to output time in readable order
     resultUnits.reverse()
 
-    # remove trailing "00" if we are reducing time
     if reduceTime:
-        while True:
-            if resultUnits[0] != "00" or len(resultUnits) == 1:
-                break
-            resultUnits.pop(0)
-        log.debug(str(resultUnits))
-        # as we reduced time, the result time unit might have changed (e.e 00:01:30 hours now became 01:30 minuts)
-        resultTimeUnit = timeUnits[len(resultUnits) - 1]
+        resultUnits, resultTimeUnit = getReducedTime(resultUnits)
 
-    formatedTime = ":".join(resultUnits)
+    result = ":".join(resultUnits)
 
-    if int(resultUnits[0]) < 2:
-        return f"{formatedTime} {getSingularTimeUnit(resultTimeUnit)}"
-    return f"{formatedTime} {resultTimeUnit.value}"
+    if formatTime:
+        result = f"{result} {getSingularTimeUnit(resultTimeUnit) if int(resultUnits[0]) < 2 else resultTimeUnit.value}"
+    return result
 
 
 def getStatus():
