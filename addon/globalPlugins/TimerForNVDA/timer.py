@@ -301,7 +301,7 @@ timePhases = {
 initializeTimer()
 
 
-def secondsToTime(currentTime, targetTimeUnit, reduceTime=False):
+def secondsToTime(currentTime, targetTimeUnit, reduceTime=True):
     resultUnits = []
     resultTimeUnit = targetTimeUnit
     timeUnits = list(TimeUnit)
@@ -342,17 +342,15 @@ def getStatus():
     # for stopwatch, time is always shown considering hours as time unit
     # for timer, we respect the timeUnit configured im timer object
     timeUnit = timer._timeUnit if timer.isTimer() else TimeUnit.HOURS
-    # for stopwatch, we always reduce time
-    # for timer, we respect the time format
-    reduceTime = False if timer.isTimer() else True
+
     if not timer.isRunning():
         status = _("stopped")
         if timer.isStopWatch() and timer.stopWatchResult is not None:
-            status += f" {_('at')} {secondsToTime(timer.stopWatchResult, timeUnit, reduceTime)}"
+            status += f" {_('at')} {secondsToTime(timer.stopWatchResult, timeUnit)}"
         return f"{timer._mode.value}: {status}"
     pausedStatus = _(" (paused)") if timer.isPaused() else ""
     ELAPSED = _("elapsed")
     TO_FINISH = _("to finish")
     if timer.isTimer():
-        return f"{timer._mode.value}: {secondsToTime(timer._counter, timeUnit, reduceTime)} {TO_FINISH}{pausedStatus}"
-    return f"{timer._mode.value}: {secondsToTime(timer._counter, timeUnit, reduceTime)} {ELAPSED}{pausedStatus}"
+        return f"{timer._mode.value}: {secondsToTime(timer._counter, timeUnit)} {TO_FINISH}{pausedStatus}"
+    return f"{timer._mode.value}: {secondsToTime(timer._counter, timeUnit)} {ELAPSED}{pausedStatus}"
