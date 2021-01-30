@@ -237,6 +237,8 @@ class Timer:
             self._counter += 1
             self._report(TimerEvent.COUNTER)
             if self._isTick():
+                self._currentTime = secondsToTime(
+                    self._counter, self._timeUnit, formatTime=False)
                 self._report(TimerEvent.TICK)
 
 
