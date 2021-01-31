@@ -114,5 +114,5 @@ O tempo decorrido relativo ao último cronômetro executado pode ser consultado 
 
 # ajudando a traduzir ou desenvolver o complemento
 
-Se quiser ajudar a traduzir ou desenvolver o complemento, acesse o [repositório do projeto](https://github.com/marlon-sousa/EnhancedFindDialog) e busque pelo arquivo contributing.md no diretório de documentação equivalente ao seu idioma.
+Se quiser ajudar a traduzir ou desenvolver o complemento, acesse o [repositório do projeto](${addon_url}) e busque pelo arquivo contributing.md no diretório de documentação equivalente ao seu idioma.
 
