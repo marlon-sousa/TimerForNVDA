@@ -1,22 +1,30 @@
 # -*- coding: UTF-8 -*-
-# A part of the EnhancedFind addon for NVDA
-# Copyright (C) 2020 Marlon Sousa
+# A part of the TimerForNVDA addon for NVDA
+# Copyright (C) 2021 Marlon Sousa
 # This file is covered by the GNU General Public License.
 # See the file COPYING.txt for more details.
 
+import addonHandler
 from enum import auto, Enum, unique
+
+addonHandler.initTranslation()
 
 
 @unique
 class OperationMode(Enum):
+    # Translators: stopwatch
     STOP_WATCH = _("Stopwatch")
+    # Translators: timer
     TIMER = _("Timer")
 
 
 @unique
 class TimeUnit(Enum):
+    # Translators: seconds
     SECONDS = _("seconds")
+    # Translators: minutes
     MINUTES = _("minutes")
+    # Translators: hours
     HOURS = _("hours")
 
 
@@ -47,8 +55,11 @@ _units = {
 }
 
 _singularTimeUnits = {
+    # Translators: singular of seconds
     "SECONDS": _("second"),
+    # Translators: singular of minutes
     "MINUTES": _("minute"),
+    # Translators: singular of hours
     "HOURS": _("hour")
 }
 

@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-# A part of the EnhancedFind addon for NVDA
-# Copyright (C) 2020 Marlon Sousa
+# A part of the TimerForNVDA addon for NVDA
+# Copyright (C) 2021 Marlon Sousa
 # This file is covered by the GNU General Public License.
 # See the file COPYING.txt for more details.
 
-
+import addonHandler
 from . import conf
 import core
 from logHandler import log
@@ -16,6 +16,13 @@ import tones
 from .types import getSingularTimeUnit, getTime, OperationMode, TimeUnit, TimerEvent, TimerStatus
 import wx
 import ui
+
+addonHandler.initTranslation()
+
+# Translators: timer
+TIMER = _("timer")
+# Translators: stop watch
+STOP_WATCH = _("stopwatch")
 
 timerRunning = False
 
@@ -34,7 +41,6 @@ class Timer:
         self._mode = OperationMode[conf.getConfig("operationMode")]
         self._timeUnit = TimeUnit[conf.getConfig("timeUnit")]
         self._reporters = []
-        self._counterLock = threading.Lock()
 
     def _resetState(self):
         self._currentTime = "0"
@@ -96,7 +102,7 @@ class Timer:
             self._report(TimerEvent.STARTED)
 
     def start(self, initialTime=None):
-        if(self.isTimer()):
+        if self.isTimer():
             self._startTimer(initialTime)
         else:
             self._startStopWatch()
@@ -109,7 +115,12 @@ class Timer:
 
     def pause(self):
         if self._thread is None or not self.isRunning():
-            self.warn(_("can not pause timer because it is not running"))
+            # Translators: can not pause
+            CAN_NOT_PAUSE = _("Can not pause")
+            # Translators: because it is not running
+            BECAUSE_IT_IS_NOT_RUNNING = _("because it is not running")
+            self.warn(
+                f"{CAN_NOT_PAUSE} {TIMER if self.isTimer() else STOP_WATCH} {BECAUSE_IT_IS_NOT_RUNNING}")
             return
         self._shouldRun = False
         if self._thread != threading.current_thread() and self._thread.is_alive():
@@ -119,7 +130,12 @@ class Timer:
 
     def resume(self):
         if not self.isPaused():
-            self.warn(_("Can not resumer because timer is not paused"))
+            # Translators: can not resume
+            CAN_NOT_RESUME = _("Can not resume")
+            # Translators: because it is not paused
+            BECAUSE_IT_IS_NOT_PAUSED = _("because it is not paused")
+            self.warn(
+                f"{CAN_NOT_RESUME} {TIMER if self.isTimer() else STOP_WATCH} {BECAUSE_IT_IS_NOT_PAUSED}")
             return
         self._status = TimerStatus.STARTED
         self._run()
@@ -151,7 +167,8 @@ class Timer:
 
     def _shouldStart(self, initialTime=None):
         if self.isTimer() and not initialTime and not self._initialTime:
-            self.warn(_("Initial time not configured. starting aborted"))
+            # Translators: initial time not configured. Start aborted
+            self.warn(_("Initial time not configured. start aborted"))
             return False
         return self._thread is None or self._thread and not self._thread.is_alive()
 
@@ -166,6 +183,7 @@ class Timer:
         timeUnits = self._currentTime.split(":")
         expectedAmountUnits = timePhases[self._timeUnit.name] + 1
         if len(timeUnits) > expectedAmountUnits:
+            # Translators: could not normalize time
             self._status = _("Could not mormalize time")
             self._report(TimerEvent.ERROR)
             raise Exception(self._status)
@@ -182,7 +200,6 @@ class Timer:
 
     def _currentTimeToSeconds(self):
         self._normalizeTime()
-        log.debug(self._currentTime)
         timeUnits = (self._currentTime.split(":"))
         if len(timeUnits) > 3:
             raise Exception("Invalid time error")
@@ -246,6 +263,8 @@ beepDurations = {
     TimeUnit.SECONDS.value: 10,
     TimeUnit.MINUTES.value: 100,
     TimeUnit.HOURS.value: 200
+
+
 }
 
 
@@ -277,6 +296,7 @@ def reportTimeCompletion(evt):
 
 def reportMessages(evt):
     if evt["type"] == TimerEvent.WARNING:
+        # Translators: warning
         ui.message(f"{_('warning: ')} {evt['message']}")
     elif evt["type"] == TimerEvent.COMPLETED:
         if timer.isStopWatch():
@@ -322,7 +342,11 @@ def getReducedTime(units):
             break
         units.pop()
 
-    units[0] = units[0].lstrip("0")
+    if len(units) == 1 and units[0].count("0") == len(units[0]):
+        units[0] = "0"
+    else:
+        units[0] = units[0].lstrip("0")
+
     return (units, timeUnit)
 
 
@@ -361,12 +385,18 @@ def getStatus():
     timeUnit = timer._timeUnit if timer.isTimer() else TimeUnit.HOURS
 
     if not timer.isRunning():
+        # Translators: stopped
         status = _("stopped")
         if timer.isStopWatch() and timer.stopWatchResult is not None:
-            status += f" {_('at')} {secondsToTime(timer.stopWatchResult, timeUnit)}"
+            # Translators: at
+            AT = _("at")
+            status += f" {AT} {secondsToTime(timer.stopWatchResult, timeUnit)}"
         return f"{timer._mode.value}: {status}"
+    # Translators: paused
     pausedStatus = _(" (paused)") if timer.isPaused() else ""
+    # translators: elapsed
     ELAPSED = _("elapsed")
+    # Translators: to finish
     TO_FINISH = _("to finish")
     if timer.isTimer():
         return f"{timer._mode.value}: {secondsToTime(timer._counter, timeUnit)} {TO_FINISH}{pausedStatus}"

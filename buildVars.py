@@ -20,9 +20,12 @@ addon_info = {
     # Add-on description
     # Translators: Long description to be shown for this add-on on add-on information from add-ons manager
     "addon_description": _("""This addon brings a fast, functional ande simple implementation of timer and stopwatch to be used with NVDA.
-Start a timer or stopwatch, using the time unit and reporting modes you need"""),
+Start a timer or stopwatch, using the time unit and reporting modes you need.
+Choose between speech, sound or no reporters.
+Monitor progress through reporters, settings dialog or anywhere using NVDA commands.
+Control timer and stopwatch from anywhere using NVDA commands."""),
     # version
-    "addon_version": "0.2.0-alpha",
+    "addon_version": "1.0.0",
     # Author(s)
     "addon_author": u"Marlon Brandão de Sousa <marlon.bsousa@gmail.com>",
     # URL for the add-on documentation support
@@ -41,7 +44,7 @@ Start a timer or stopwatch, using the time unit and reporting modes you need""")
 # Define the python files that are the sources of your add-on.
 # You can use glob expressions here, they will be expanded.
 pythonSources = [os.path.join(
-    "addon", "globalPlugins", "EnhancedDictionaries", "*.py")]
+    "addon", "globalPlugins", "TimerForNVDA", "*.py")]
 
 # Files that contain strings for translation. Usually your python sources
 i18nSources = pythonSources + ["buildVars.py"]

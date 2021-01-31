@@ -1,3 +1,10 @@
+# -*- coding: UTF-8 -*-
+# A part of the TimerForNVDA addon for NVDA
+# Copyright (C) 2021 Marlon Sousa
+# This file is covered by the GNU General Public License.
+# See the file COPYING.txt for more details.
+
+import addonHandler
 from .guiHelper import HideDialog, TimerDialog, dialogIsRunning
 import globalPluginHandler
 import gui
@@ -5,6 +12,8 @@ from scriptHandler import script
 from .timer import getStatus, timer
 import ui
 import wx
+
+addonHandler.initTranslation()
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):

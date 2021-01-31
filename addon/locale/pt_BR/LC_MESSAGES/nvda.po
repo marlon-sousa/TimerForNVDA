@@ -1,0 +1,206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the TimerForNVDA package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TimerForNVDA 1.0.0\n"
+"Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
+"POT-Creation-Date: 2021-01-31 11:26-0300\n"
+"PO-Revision-Date: 2021-01-31 11:40-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Translators: resume button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:24
+msgid "Resume"
+msgstr "Continuar"
+
+#. Translators: Pause button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:26
+msgid "Pause"
+msgstr "Pausar"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:49
+msgid "Timer for NVDA"
+msgstr "Timer para NVDA"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:66
+msgid "Time unit"
+msgstr "Unidade de tempo"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:70
+msgid "Type of watch"
+msgstr "Tipo de relógio"
+
+#. Translators: start button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:73
+msgid "start"
+msgstr "Iniciar"
+
+#. Translators: stop button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:76
+msgid "stop"
+msgstr "Parar"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:80
+msgid "Report progress with sound"
+msgstr "Reportar progresso com son"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:83
+msgid "Report progress with speech"
+msgstr "Reportar progresso com fala"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:88
+msgid "Close"
+msgstr "Fechar"
+
+#. Translators: amount of
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:260
+msgid "amount of"
+msgstr "Quantidade de"
+
+#. Translators: for
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:262
+msgid "for"
+msgstr "para"
+
+#. Translators: timer
+#: addon\globalPlugins\TimerForNVDA\timer.py:23
+msgid "timer"
+msgstr "timer"
+
+#. Translators: stop watch
+#: addon\globalPlugins\TimerForNVDA\timer.py:25
+msgid "stopwatch"
+msgstr "cronômetro"
+
+#. Translators: can not pause
+#: addon\globalPlugins\TimerForNVDA\timer.py:119
+msgid "Can not pause"
+msgstr "Não foi possível pausar"
+
+#. Translators: because it is not running
+#: addon\globalPlugins\TimerForNVDA\timer.py:121
+msgid "because it is not running"
+msgstr "Porque ele não está em operação"
+
+#. Translators: can not resume
+#: addon\globalPlugins\TimerForNVDA\timer.py:134
+msgid "Can not resume"
+msgstr "Não foi possível continuar"
+
+#. Translators: because it is not paused
+#: addon\globalPlugins\TimerForNVDA\timer.py:136
+msgid "because it is not paused"
+msgstr "Por que ele não está pausado"
+
+#. Translators: initial time not configured. Start aborted
+#: addon\globalPlugins\TimerForNVDA\timer.py:171
+msgid "Initial time not configured. start aborted"
+msgstr "Tempo inicial não configurado. Início abortado"
+
+#. Translators: could not normalize time
+#: addon\globalPlugins\TimerForNVDA\timer.py:187
+msgid "Could not mormalize time"
+msgstr "Não foi possível normalizar tempo"
+
+#. Translators: stopped
+#: addon\globalPlugins\TimerForNVDA\timer.py:389
+msgid "stopped"
+msgstr "parado"
+
+#. Translators: at
+#: addon\globalPlugins\TimerForNVDA\timer.py:392
+msgid "at"
+msgstr "em"
+
+#. Translators: paused
+#: addon\globalPlugins\TimerForNVDA\timer.py:396
+msgid " (paused)"
+msgstr "(pausado)"
+
+#. translators: elapsed
+#: addon\globalPlugins\TimerForNVDA\timer.py:398
+msgid "elapsed"
+msgstr "decorridos"
+
+#. Translators: to finish
+#: addon\globalPlugins\TimerForNVDA\timer.py:400
+msgid "to finish"
+msgstr "para término"
+
+#. Translators: stopwatch
+#: addon\globalPlugins\TimerForNVDA\types.py:16
+msgid "Stopwatch"
+msgstr "cronômetro"
+
+#. Translators: timer
+#: addon\globalPlugins\TimerForNVDA\types.py:18
+msgid "Timer"
+msgstr "timer"
+
+#. Translators: seconds
+#: addon\globalPlugins\TimerForNVDA\types.py:24
+msgid "seconds"
+msgstr "segundos"
+
+#. Translators: minutes
+#: addon\globalPlugins\TimerForNVDA\types.py:26
+msgid "minutes"
+msgstr "minutos"
+
+#. Translators: hours
+#: addon\globalPlugins\TimerForNVDA\types.py:28
+msgid "hours"
+msgstr "horas"
+
+#. Translators: singular of seconds
+#: addon\globalPlugins\TimerForNVDA\types.py:59
+msgid "second"
+msgstr "segundo"
+
+#. Translators: singular of minutes
+#: addon\globalPlugins\TimerForNVDA\types.py:61
+msgid "minute"
+msgstr "minuto"
+
+#. Translators: singular of hours
+#: addon\globalPlugins\TimerForNVDA\types.py:63
+msgid "hour"
+msgstr "hora"
+
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on to be shown on installation and add-on information.
+#: buildVars.py:19
+msgid "Simple Timer and stopwatch for NVDA"
+msgstr "Timer e cronômetro simples para NVDA"
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
+#: buildVars.py:22
+msgid ""
+"This addon brings a fast, functional ande simple implementation of timer and "
+"stopwatch to be used with NVDA.\n"
+"Start a timer or stopwatch, using the time unit and reporting modes you "
+"need.\n"
+"Choose between speech, sound or no reporters.\n"
+"Monitor progress through reporters, settings dialog or anywhere using NVDA "
+"commands.\n"
+"Control timer and stopwatch from anywhere using NVDA commands."
+msgstr ""
+"Este complemento trás uma implementação simples, funcional e rápida de timer "
+"e cronômetro para NVDA\n"
+"Inicie um timer ou cronômetro, usando a unidade de tempo e o modo de "
+"relatórios que você precisar.\n"
+"Escolha entre relatórios de som, fala ou nenhum\n"
+"Monitore progresso usando relatórios ou sob demanda, usando comandos do "
+"NVDA.\n"
+"Controle timer ou cronômetro de qualquer lugar, usando comandos do NVDA."
