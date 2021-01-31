@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
-# A part of the EnhancedFind addon for NVDA
+# A part of the TimerForNVDA addon for NVDA
 # Copyright (C) 2020 Marlon Sousa
 # This file is covered by the GNU General Public License.
 # See the file COPYING.txt for more details.
 
+import addonHandler
 from . import conf
 import core
 from enum import Enum, unique
@@ -17,6 +18,14 @@ import string
 import ui
 import wx
 
+addonHandler.initTranslation()
+
+# Translators: resume button
+RESUME = _("Resume")
+# Translators: Pause button
+PAUSE = _("Pause")
+
+
 instance = None
 
 
@@ -29,13 +38,13 @@ def HideDialog():
 
 
 class TimerDialog(wx.Dialog):
-    """A dialog used to manager timer and stop watch.
+    """A dialog used to configure timer and stop watch.
     """
 
     def __init__(self, parent):
         global instance
 
-        # Translators: Title of a dialog to find text.
+        # Translators: Title of timer for NVDA settings  dialog
         super(TimerDialog, self).__init__(
             parent, wx.ID_ANY, _("Timer for NVDA"))
 
@@ -52,22 +61,29 @@ class TimerDialog(wx.Dialog):
             self, orientation=wx.HORIZONTAL)
         self._timerValueCtrl = timerHelper.addLabeledControl(
             "", wx.TextCtrl)
+        # Translators: time unit radio group label
         self._timeUnitCTRL = timerHelper.addItem(wx.RadioBox(self, label=_(
             "Time unit"), choices=getTimeUnits(), majorDimension=1, style=wx.RA_SPECIFY_ROWS))
         mainHelper.addItem(timerHelper)
+        # Translators: type of watch combobox label
         self._operationModeCTRL = mainHelper.addLabeledControl(
             _("Type of watch"), wx.Choice, id=wx.ID_ANY, choices=getOperationModes())
         timerActions = guiHelper.ButtonHelper(wx.HORIZONTAL)
+        # Translators: start button
         self._startButton = timerActions.addButton(self, label=_("start"))
-        self._pauseButton = timerActions.addButton(self, label=_("Pause"))
+        self._pauseButton = timerActions.addButton(self, label=PAUSE)
+        # Translators: stop button
         self._stopButton = timerActions.addButton(self, label=_("stop"))
         mainHelper.addItem(timerActions)
+        # Translators: report progress with sound checkbox label
         self._reportWithSoundCheckbox = feedbackHelper.addItem(
             wx.CheckBox(self, id=wx.ID_ANY, label=_("Report progress with sound")))
+        # Translators: report progress with speech checkbox label
         self._reportWithSpeechCheckbox = feedbackHelper.addItem(
             wx.CheckBox(self, id=wx.ID_ANY, label=_("Report progress with speech")))
         mainHelper.addItem(feedbackHelper)
         dialogActions = guiHelper.ButtonHelper(wx.HORIZONTAL)
+        # Translators: close button
         self._closeButton = dialogActions.addButton(
             self, label=_("Close"), id=wx.ID_CANCEL)
         mainHelper.addItem(dialogActions)
@@ -232,12 +248,16 @@ class TimerDialog(wx.Dialog):
                 self._startButton.SetFocus()
             return
         if evt["type"] == TimerEvent.PAUSED:
-            self._pauseButton.SetLabel(_("Resume"))
+            self._pauseButton.SetLabel(RESUME)
         elif evt["type"] == TimerEvent.RESUMED:
-            self._pauseButton.SetLabel(_("Pause"))
+            self._pauseButton.SetLabel(PAUSE)
         elif evt["type"] == TimerEvent.COUNTER:
             self._statusBar.SetStatusText(
                 getStatus())
 
     def _getTimerConfigLabel(self):
-        return f"amount of {self._timeUnitCTRL.GetStringSelection()} for {self._operationModeCTRL.GetStringSelection()}"
+        # Translators: amount of
+        AMOUNT_OF = _("amount of")
+        # Translators: for
+        FOR = _("for")
+        return f"{AMOUNT_OF} {self._timeUnitCTRL.GetStringSelection()} {FOR} {self._operationModeCTRL.GetStringSelection()}"
