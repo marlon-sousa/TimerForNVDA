@@ -130,9 +130,9 @@ class Timer:
 
     def resume(self):
         if not self.isPaused():
-            # Translators: can not pause
+            # Translators: can not resume
             CAN_NOT_RESUME = _("Can not resume")
-            # Translators: because it is not running
+            # Translators: because it is not paused
             BECAUSE_IT_IS_NOT_PAUSED = _("because it is not paused")
             self.warn(
                 f"{CAN_NOT_RESUME} {TIMER if self.isTimer() else STOP_WATCH} {BECAUSE_IT_IS_NOT_PAUSED}")
@@ -388,8 +388,9 @@ def getStatus():
         # Translators: stopped
         status = _("stopped")
         if timer.isStopWatch() and timer.stopWatchResult is not None:
-            # Translators: preposition after word stopped for stopwatch
-            status += f" {_('at')} {secondsToTime(timer.stopWatchResult, timeUnit)}"
+            # Translators: at
+            AT = _("at")
+            status += f" {AT} {secondsToTime(timer.stopWatchResult, timeUnit)}"
         return f"{timer._mode.value}: {status}"
     # Translators: paused
     pausedStatus = _(" (paused)") if timer.isPaused() else ""
