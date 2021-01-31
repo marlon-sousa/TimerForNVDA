@@ -1,4 +1,4 @@
-from .guiHelper import TimerDialog
+from .guiHelper import HideDialog, TimerDialog, dialogIsRunning
 import globalPluginHandler
 import gui
 from scriptHandler import script
@@ -11,10 +11,16 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
     @script(gesture="kb:NVDA+control+shift+t")
     def script_showTimerDialog(self, gesture):
+        if dialogIsRunning():
+            # script has been triggered when timer dialog is already shown.
+            # we will hide it now to allow focus to be set at it when it is shown again
+            HideDialog()
+        else:
+            self.dialog = TimerDialog(gui.mainFrame)
+
         def run():
             gui.mainFrame.prePopup()
-            d = TimerDialog(gui.mainFrame)
-            d.ShowModal()
+            self.dialog.Show(True)
             gui.mainFrame.postPopup()
         wx.CallAfter(run)
 

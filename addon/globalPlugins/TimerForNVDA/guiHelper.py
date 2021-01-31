@@ -17,18 +17,31 @@ import string
 import ui
 import wx
 
+instance = None
+
+
+def dialogIsRunning():
+    return instance is not None
+
+
+def HideDialog():
+    instance.Show(False)
+
 
 class TimerDialog(wx.Dialog):
     """A dialog used to manager timer and stop watch.
     """
 
     def __init__(self, parent):
+        global instance
+
         # Translators: Title of a dialog to find text.
         super(TimerDialog, self).__init__(
             parent, wx.ID_ANY, _("Timer for NVDA"))
 
         self._buildGui()
         self._bindEvents()
+        instance = self
 
     def _buildGui(self):
         mainSizer = wx.BoxSizer(wx.VERTICAL)
@@ -86,7 +99,9 @@ class TimerDialog(wx.Dialog):
         timer.registerReporter(self.OnTimer)
 
     def OnClose(self, event):
+        global instance
         timer.unregisterReporter(self.OnTimer)
+        instance = None
         self.Destroy()
 
     def _setInitialValues(self):
@@ -116,10 +131,6 @@ class TimerDialog(wx.Dialog):
         self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
         self._timerValueCtrl.SetEditable(
             not timer.isRunning() and self._operationModeIsTimer())
-        if not self._startButton.IsEnabled():
-            self._stopButton.SetFocus()
-        elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl and self._operationModeIsTimer():
-            self._startButton.SetFocus()
 
     def _configureReporter(self, ctrl, reporter):
         if ctrl.IsChecked():
@@ -127,8 +138,29 @@ class TimerDialog(wx.Dialog):
         else:
             timer.unregisterReporter(reporter)
 
+    # a timer value is valid if
+    # 1- it has a simple unit (00, 01,...)
+    # 2- It has sub units and they are no greater than 59
+    # 3- it has no empty units
     def _timerValueIsValid(self):
-        return self._timerValueCtrl.GetValue() != "" and float(self._timerValueCtrl.GetValue()) != 0
+        result = False
+        timerValueInUnits = self._timerValueCtrl.GetValue().split(":")
+        amountUnits = len(timerValueInUnits)
+        unitIndex = amountUnits - 1
+        timeUnitIndex = self._timeUnitCTRL.GetSelection()
+        if unitIndex <= timeUnitIndex:
+            while(True):
+                if not timerValueInUnits[unitIndex]:
+                    break
+                if unitIndex > 0 and int(timerValueInUnits[unitIndex]) > 59:
+                    break
+                if unitIndex == 0:
+                    result = True
+                    break
+                unitIndex = unitIndex - 1
+        if not result and amountUnits > (timeUnitIndex + 1):
+            wx.Bell()
+        return result
 
     def _operationModeIsStopWatch(self):
         return OperationMode(self._operationModeCTRL.GetStringSelection()) == OperationMode.STOP_WATCH
@@ -153,14 +185,17 @@ class TimerDialog(wx.Dialog):
         conf.setConfig("operationMode", timer._mode.name)
 
     def OnKeyPress(self, evt):
+        BACK_SPACE = 8
+        DEL = 127
         key = evt.GetKeyCode()
-        character = chr(key)
-        if key == 8 or key > 256 or character == locale.localeconv()["decimal_point"] or character in string.digits:
+        if key in (BACK_SPACE, DEL) or key > 256 or chr(key) in (string.digits + ":"):
             wx.CallAfter(self._refreshUI)
             evt.Skip()
+        else:
+            wx.Bell()
 
     def OnTimeUnitChanged(self, evt):
-        self._getTimerValueCtrlLabel().SetLabel(self._getTimerConfigLabel())
+        self._refreshUI()
 
     def OnOperationModeChanged(self, evt):
         self._refreshUI()
@@ -179,8 +214,7 @@ class TimerDialog(wx.Dialog):
     def OnStart(self, evt):
         self._configureTimer()
         self._persistConfiguration()
-        initialTime = int(self._timerValueCtrl.GetValue()
-                          ) if timer.isTimer() else None
+        initialTime = self._timerValueCtrl.GetValue() if timer.isTimer() else None
         timer.start(initialTime)
 
     def OnStop(self, evt):
@@ -192,6 +226,10 @@ class TimerDialog(wx.Dialog):
     def OnTimer(self, evt):
         if evt["type"] in [TimerEvent.STARTED, TimerEvent.STOPPED]:
             self._refreshUI()
+            if not self._startButton.IsEnabled():
+                self._stopButton.SetFocus()
+            elif not self._stopButton.IsEnabled() and wx.Window.FindFocus() != self._timerValueCtrl and self._operationModeIsTimer():
+                self._startButton.SetFocus()
             return
         if evt["type"] == TimerEvent.PAUSED:
             self._pauseButton.SetLabel(_("Resume"))
