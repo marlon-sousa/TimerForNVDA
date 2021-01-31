@@ -342,7 +342,11 @@ def getReducedTime(units):
             break
         units.pop()
 
-    units[0] = units[0].lstrip("0")
+    if len(units) == 1 and units[0].count("0") == len(units[0]):
+        units[0] = "0"
+    else:
+        units[0] = units[0].lstrip("0")
+
     return (units, timeUnit)
 
 
