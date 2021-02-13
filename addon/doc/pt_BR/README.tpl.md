@@ -22,7 +22,8 @@ Neste mesmo diálogo, Também podem ser configurados diferentes relatórios de p
 
 #### Como funciona
 
-Pressione CTRL + NVDA + Shift + t para abrir o diálogo de configurações.
+Use o submenu  "Configurações do complemento Timer para NVDA" ou pressione  NVDA + Shift + t Para abrir o diálogo de configurações do complemento.
+O submenu pode ser encontrado no menu "ferramentas" do NVDA.
 
 * Se existir um cronômetro ou um timer em andamento, você pode:
     * Monitorar o progresso lendo a barra de status do diálogo.

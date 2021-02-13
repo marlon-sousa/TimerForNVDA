@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TimerForNVDA 1.0.0\n"
 "Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
-"POT-Creation-Date: 2021-01-31 11:26-0300\n"
-"PO-Revision-Date: 2021-01-31 11:40-0300\n"
+"POT-Creation-Date: 2021-02-13 07:28-0300\n"
+"PO-Revision-Date: 2021-02-13 07:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:25
+msgid "Timer for NVDA settings"
+msgstr "configurações do complemento Timer para NVDA"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:25
+msgid "Show settings dialog for Timer for NVDA addon"
+msgstr "mostra o diálodo de configurações do complemento Timer para NVDA"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:37
+msgid "Shows the timer for MVDA settings dialog"
+msgstr "Mostra o diálogo de configurações para o timer e cronômetro"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:58
+msgid "Starts or stops timer or stopwatch"
+msgstr "Inicia ou para um timer ou cronômetro"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:65
+msgid "Pauses or resumes a running timer or stopwatch"
+msgstr "Pausa ou continua um timer ou cronômetro em execução"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:69
+msgid "Obtains status report from time or stopwatch"
+msgstr "Obtêm o relatório de status de um timer ou cronômetro"
 
 #. Translators: resume button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:24
