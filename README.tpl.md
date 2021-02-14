@@ -21,7 +21,8 @@ Different Progress monitoring reports  can also be configured from the same dial
 
 #### how it works
 
-Press CTRL + NVDA + Shift + t to open the settings dialog.
+Either use the "timer for NVDA settings" submenu  or press NVDA + Shift + t To open the addon settings dialog.
+The submenu is located under NVDA "tools" menu.
 
 * if either timer or stopwatch are running, you can:
     * Monitor progress by reading the settings dialog status bar.

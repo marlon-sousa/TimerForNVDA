@@ -3,7 +3,7 @@ Brings timer and stopwatch functionalities right to NVDA
 
 ## download
 
-Download the [ Simple Timer and stopwatch for NVDA 1.0.0 addon](https://github.com/marlon-sousa/TimerForNVDA/releases/download/1.0.0/TimerForNVDA-1.0.0.nvda-addon)
+Download the [ Simple Timer and stopwatch for NVDA 1.1.0 addon](https://github.com/marlon-sousa/TimerForNVDA/releases/download/1.1.0/TimerForNVDA-1.1.0.nvda-addon)
 
 ## timers and stopwatches
 
@@ -21,7 +21,8 @@ Different Progress monitoring reports  can also be configured from the same dial
 
 #### how it works
 
-Press CTRL + NVDA + Shift + t to open the settings dialog.
+Either use the "timer for NVDA settings" submenu  or press NVDA + Shift + t To open the addon settings dialog.
+The submenu is located under NVDA "tools" menu.
 
 * if either timer or stopwatch are running, you can:
     * Monitor progress by reading the settings dialog status bar.
