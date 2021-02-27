@@ -27,7 +27,7 @@ msgid "Show settings dialog for Timer for NVDA addon"
 msgstr "mostra o diálodo de configurações do complemento Timer para NVDA"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:37
-msgid "Shows the timer for MVDA settings dialog"
+msgid "Shows the timer for NVDA settings dialog"
 msgstr "Mostra o diálogo de configurações para o timer e cronômetro"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:58

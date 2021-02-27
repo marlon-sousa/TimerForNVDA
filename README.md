@@ -1,9 +1,9 @@
-# Timer for NVDA 0.2.0-alpha
+# Timer for NVDA 1.2.0
 Brings timer and stopwatch functionalities right to NVDA
 
 ## download
 
-Download the [ Simple Timer and stopwatch for NVDA 1.1.0 addon](https://github.com/marlon-sousa/TimerForNVDA/releases/download/1.1.0/TimerForNVDA-1.1.0.nvda-addon)
+Download the [ Simple Timer and stopwatch for NVDA 1.2.0 addon](https://github.com/marlon-sousa/TimerForNVDA/releases/download/1.2.0/TimerForNVDA-1.2.0.nvda-addon)
 
 ## timers and stopwatches
 
@@ -36,7 +36,7 @@ The submenu is located under NVDA "tools" menu.
 
 ### run from NVDA commands
 
-At any time, it is possible to start, stop, pause, resume and get progress reports from a timer orstopwatch without having to use the settings dialog.
+At any time, it is possible to start, stop, pause, resume and get progress reports from a timer or stopwatch without having to use the settings dialog.
 
 #### How it works
 
@@ -54,7 +54,7 @@ In the settings dialog, initial time for timer is entered in HH:MM:SS format, wh
 It is not necessary to type the full format, the system will deduce it:
 
 * if a simple number is entered, the selected time unit will be used.
-* if sub units are specified, they will be considered. For example, 01:05 becomes ome minute and five seconds, if selected time unit is "minutes".
+* if sub units are specified, they will be considered. For example, 01:05 becomes one minute and five seconds, if selected time unit is "minutes".
 If the selected time unit is "hours", 01:05 becomes one hour, five minutes and zero seconds.
 * Sub units beyond "seconds" are invalid. If time unit is "minutes", the value 01:05:02 will not be accepted.
 
@@ -80,7 +80,7 @@ Therefore, every time NVDA speaks, calculates or processes anything, the time co
 
 The precision, however, should be good for the vast majority of cases, unless milisecond precision is necessary or otherwise some process will be severely impacted by any kind of delay.
 
-For better precision results, reports should be turned off and status should be requested on demand either by issuing ctrl+sfift+NVDA+r or by reading the status bar of the timer dialog.
+For better precision results, reports should be turned off and status should be requested on demand either by issuing ctrl+shift+NVDA+r or by reading the status bar of the timer dialog.
 
 ### reporters
 
@@ -110,6 +110,22 @@ When the stopwatch is stopped, its elapsed time is spoken, independently of the 
 
 The elapsed time of the last stopwatch execution can be checked by reviewing the settings dialog status bar or pressing NVDA+ctrl+shift+r. This information is reset when a new stopwatch or timer starts.
 
+### Modify imput gestures
+
+You can change default input gestures for this addon by accessing the "Timer for NVDA" section in the NVDA menu / Preferences / imput gestures dialog.
+
+Remember that, should you change input gestures, you will need to choose options not used by other NVDA or external addon scripts in order to avoid conflicts.
+
 # Contributing and translating
 
-If you want to contribute or translate this addon, please access the [project repository](https://github.com/marlon-sousa/TimerForNVDA) and find instructions on the contributing.md in the english documentation directory
+If you want to contribute or translate this addon, please access the [project repository](https://github.com/marlon-sousa/TimerForNVDA) and find instructions on the contributing.md in either your language or English language directory.
+
+## Contributors
+
+Special thanks to
+
+* Marlon Brandão de Sousa - Brazilian Portuguese translation
+* Ângelo Miguel Abrantes - Portuguese translation
+* Rémy Ruiz - French translation
+* Rémy Ruiz - Spanish translation
+
