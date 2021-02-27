@@ -36,7 +36,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         except (RuntimeError, AttributeError):
             pass
 
-    @ script(gesture="kb:NVDA+shift+t", description=_("Shows the timer for MVDA settings dialog"))
+    @ script(gesture="kb:NVDA+shift+t", description=_("Shows the timer for NVDA settings dialog"))
     def script_showTimerDialog(self, gesture):
         self.showSettingsDialog()
 

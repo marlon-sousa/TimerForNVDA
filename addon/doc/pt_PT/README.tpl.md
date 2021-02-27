@@ -113,7 +113,21 @@ Quando o cronómetro é parado, o tempo decorrido é anunciado, independentement
 
 O tempo decorrido relativo ao último cronómetro executado pode ser consultado a qualquer momento revendo-se a barra de status do diálogo de configurações ou pressionando-se ctrl+shift+NVDA+R. Esta informação fica disponível até que um novo temporizador ou cronómetro seja iniciado.
 
+### modificar os comandos
+
+Você pode modificar todos os comandos de teclado atribuídos a funções deste extra acessando a secção "Temporizador para o NVDA" do diálogo de definição de comandos, disponível através do menu NVDA / configurações / definir comandos.
+
+Se for modificar algum comando, lembre-se de escolher combinações que não estejam em uso por comandos atuais do NVDA ou de outros extras, para que conflitos não ocorram.
+
 # ajudar a traduzir ou desenvolver o extra
 
-Se quiser ajudar a traduzir ou a desenvolver o extra, aceda o [repositório do projecto](${addon_url}) e procure pelo arquivo contributing.md no diretório de documentação equivalente ao seu idioma.
+Se quiser ajudar a traduzir ou a desenvolver o extra, aceda o [repositório do projecto](${addon_url}) e procure pelo arquivo contributing.md no diretório de documentação equivalente ao seu idioma ou no diretório do idioma Inglês.
 
+## Colaboradores
+
+Agradecimentos a:
+
+* Marlon Brandão de Sousa - tradução para Português do Brasil
+* Ângelo Miguel Abrantes - Tradução para português
+* Rémy Ruiz - Tradução para Francês
+* Rémy Ruiz - Tradução para Espanhol
