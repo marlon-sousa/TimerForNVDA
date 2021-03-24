@@ -127,7 +127,7 @@ Si deseas ayudar a traducir o desarrollar el complemento, por favor  acceda al [
 
 Agradecimientos especiales a
 
-*  Thiago Seus - Traducción Portugués del Brasil
+*  Marlon Brandão de Sousa - Traducción Portugués del Brasil
 * Ângelo Miguel Abrantes - Traducción Portugués
 * Rémy Ruiz - Traducción Francés
 * Rémy Ruiz - Traducción Español
