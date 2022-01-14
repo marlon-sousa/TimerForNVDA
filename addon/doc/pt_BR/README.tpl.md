@@ -128,6 +128,7 @@ Se quiser ajudar a traduzir ou desenvolver o complemento, acesse o [repositório
 Agradecimentos a:
 
 * Marlon Brandão de Sousa - tradução para Português do Brasil
-* Ângelo Miguel Abrantes - Tradução para português
+* Ângelo Miguel Abrantes - Tradução para Português
+* Tarik Hadžirović - Tradução para Croata
 * Rémy Ruiz - Tradução para Francês
 * Rémy Ruiz - Tradução para Espanhol

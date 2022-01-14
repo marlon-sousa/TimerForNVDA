@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the TimerForNVDA package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TimerForNVDA 1.0.0\n"
+"Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
+"POT-Creation-Date: 2021-02-13 19:25+0100\n"
+"PO-Revision-Date: 2021-12-27 14:23+0100\n"
+"Last-Translator: Tarik Hadžirović <tarik.hadzirovic.official@gmail.com>\n"
+"Language-Team: Tarik Hadžirović <tarik.hadzirovic.official@gmail.com>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:25
+msgid "Timer for NVDA settings"
+msgstr "Brojač za NVDA postavke"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:25
+msgid "Show settings dialog for Timer for NVDA addon"
+msgstr "Prikazuje dijalog postavki za dodatak Brojač za NVDA"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:37
+msgid "Shows the timer for NVDA settings dialog"
+msgstr "Prikazuje dijaloški okvir postavki za Brojač za NVDA"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:58
+msgid "Starts or stops timer or stopwatch"
+msgstr "Pokreće ili zaustavlja brojač ili štopericu"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:65
+msgid "Pauses or resumes a running timer or stopwatch"
+msgstr "Pauzira ili nastavlja rad brojača ili štoperice"
+
+#: addon\globalPlugins\TimerForNVDA\__init__.py:69
+msgid "Obtains status report from time or stopwatch"
+msgstr "Dobiva izvješće o statusu brojača ili štoperice"
+
+#. Translators: resume button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:24
+msgid "Resume"
+msgstr "Nastavi"
+
+#. Translators: Pause button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:26
+msgid "Pause"
+msgstr "Pauziraj"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:49
+msgid "Timer for NVDA"
+msgstr "Brojač za NVDA"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:66
+msgid "Time unit"
+msgstr "Vremenska jedinica"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:70
+msgid "Type of watch"
+msgstr "Vrsta sata"
+
+#. Translators: start button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:73
+msgid "start"
+msgstr "Pokreni"
+
+#. Translators: stop button
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:76
+msgid "stop"
+msgstr "Zaustavi"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:80
+msgid "Report progress with sound"
+msgstr "Najavi napredak zvukom"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:83
+msgid "Report progress with speech"
+msgstr "Najavi napredak govorom"
+
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:88
+msgid "Close"
+msgstr "Zatvori"
+
+#. Translators: amount of
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:260
+msgid "amount of"
+msgstr "količina"
+
+#. Translators: for
+#: addon\globalPlugins\TimerForNVDA\guiHelper.py:262
+msgid "for"
+msgstr "za"
+
+#. Translators: timer
+#: addon\globalPlugins\TimerForNVDA\timer.py:23
+msgid "timer"
+msgstr "Brojač"
+
+#. Translators: stop watch
+#: addon\globalPlugins\TimerForNVDA\timer.py:25
+msgid "stopwatch"
+msgstr "Štoperica"
+
+#. Translators: can not pause
+#: addon\globalPlugins\TimerForNVDA\timer.py:119
+msgid "Can not pause"
+msgstr "Nije moguće pauzirati"
+
+#. Translators: because it is not running
+#: addon\globalPlugins\TimerForNVDA\timer.py:121
+msgid "because it is not running"
+msgstr "jer nije pokrenuto"
+
+#. Translators: can not resume
+#: addon\globalPlugins\TimerForNVDA\timer.py:134
+msgid "Can not resume"
+msgstr "Ne može se nastaviti"
+
+#. Translators: because it is not paused
+#: addon\globalPlugins\TimerForNVDA\timer.py:136
+msgid "because it is not paused"
+msgstr "jer nije pauzirano"
+
+#. Translators: initial time not configured. Start aborted
+#: addon\globalPlugins\TimerForNVDA\timer.py:171
+msgid "Initial time not configured. start aborted"
+msgstr "Početno vrijeme nije konfigurirano."
+
+#. Translators: could not normalize time
+#: addon\globalPlugins\TimerForNVDA\timer.py:187
+msgid "Could not mormalize time"
+msgstr "Nije moguće normalizirati vrijeme"
+
+#. Translators: stopped
+#: addon\globalPlugins\TimerForNVDA\timer.py:389
+msgid "stopped"
+msgstr "zaustavljeno"
+
+#. Translators: at
+#: addon\globalPlugins\TimerForNVDA\timer.py:392
+msgid "at"
+msgstr "u"
+
+#. Translators: paused
+#: addon\globalPlugins\TimerForNVDA\timer.py:396
+msgid " (paused)"
+msgstr "Pauzirano"
+
+#. translators: elapsed
+#: addon\globalPlugins\TimerForNVDA\timer.py:398
+msgid "elapsed"
+msgstr "Proteklo"
+
+#. Translators: to finish
+#: addon\globalPlugins\TimerForNVDA\timer.py:400
+msgid "to finish"
+msgstr "Završiti"
+
+#. Translators: stopwatch
+#: addon\globalPlugins\TimerForNVDA\types.py:16
+msgid "Stopwatch"
+msgstr "Štoperica"
+
+#. Translators: timer
+#: addon\globalPlugins\TimerForNVDA\types.py:18
+msgid "Timer"
+msgstr "Brojač"
+
+#. Translators: seconds
+#: addon\globalPlugins\TimerForNVDA\types.py:24
+msgid "seconds"
+msgstr "sekundi"
+
+#. Translators: minutes
+#: addon\globalPlugins\TimerForNVDA\types.py:26
+msgid "minutes"
+msgstr "minuta"
+
+#. Translators: hours
+#: addon\globalPlugins\TimerForNVDA\types.py:28
+msgid "hours"
+msgstr "sati"
+
+#. Translators: singular of seconds
+#: addon\globalPlugins\TimerForNVDA\types.py:59
+msgid "second"
+msgstr "sekund"
+
+#. Translators: singular of minutes
+#: addon\globalPlugins\TimerForNVDA\types.py:61
+msgid "minute"
+msgstr "minut"
+
+#. Translators: singular of hours
+#: addon\globalPlugins\TimerForNVDA\types.py:63
+msgid "hour"
+msgstr "sat"
+
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on to be shown on installation and add-on information.
+#: buildVars.py:19
+msgid "Simple Timer and stopwatch for NVDA"
+msgstr "Jednostavan brojač i štoperica za NVDA"
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
+#: buildVars.py:22
+msgid ""
+"This addon brings a fast, functional ande simple implementation of timer and "
+"stopwatch to be used with NVDA.\n"
+"Start a timer or stopwatch, using the time unit and reporting modes you "
+"need.\n"
+"Choose between speech, sound or no reporters.\n"
+"Monitor progress through reporters, settings dialog or anywhere using NVDA "
+"commands.\n"
+"Control timer and stopwatch from anywhere using NVDA commands."
+msgstr ""
+"Ovaj dodatak donosi brzu, funkcionalnu i jednostavnu implementaciju brojača "
+"i štoperice za korištenje s NVDA.\n"
+"Pokrenite brojač ili štopericu, koristeći vremensku jedinicu i načine "
+"izvješćivanja koji su vam potrebni.\n"
+"Odaberite između govora, zvuka ili bez najave.\n"
+"Pratite napredak kroz najave, dijalog postavki ili bilo gdje pomoću NVDA "
+"naredbi.\n"
+"Kontrolirajte brojač i štopericu s bilo kojeg mjesta pomoću NVDA naredbi."
