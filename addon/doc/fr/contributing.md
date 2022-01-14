@@ -23,7 +23,7 @@ Les langues actuellement traduites peuvent être trouvées dans le dossier /addo
 
 ### Traduisant la documentation
 
-La documentation de traduction doit être générée à partir des fichiers ".tpl.md" ((pas des fichiers ".md"). Par conséquent, à l'exception du fichier "readme.md", dans la racine du projet, vous ne trouverez pas d'autres fichiers ".md" versionnés.
+La documentation de traduction doit être générée à partir des fichiers ".tpl.md" (pas des fichiers ".md"). Par conséquent, à l'exception du fichier "readme.md", dans la racine du projet, vous ne trouverez pas d'autres fichiers ".md" versionnés.
 
 Les fichiers ".tpl.md" sont des fichiers markdown normaux, Sauf pour  une fonctionnalité en plus: si vous utilisez ${[var]} n'importe où dans le texte, [var] sera remplacé par une variable avec le même nom défini dans  le buildVars.py.
 

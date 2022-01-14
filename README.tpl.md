@@ -125,7 +125,8 @@ If you want to contribute or translate this addon, please access the [project re
 Special thanks to
 
 * Marlon Brandão de Sousa - Brazilian Portuguese translation
-* Ângelo Miguel Abrantes - Portuguese translation
+* Tarik Hadžirović - Croatian translation
 * Rémy Ruiz - French translation
+* Ângelo Miguel Abrantes - Portuguese translation
 * Rémy Ruiz - Spanish translation
 

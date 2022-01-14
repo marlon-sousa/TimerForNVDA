@@ -129,5 +129,6 @@ Agradecimientos especiales a
 
 *  Marlon Brandão de Sousa - Traducción Portugués del Brasil
 * Ângelo Miguel Abrantes - Traducción Portugués
+* Tarik Hadžirović - Traducción Croata
 * Rémy Ruiz - Traducción Francés
 * Rémy Ruiz - Traducción Español
