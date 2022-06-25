@@ -122,6 +122,8 @@ If you want to contribute or translate this addon, please access the [project re
 
 ## Contributors
 
+*Brian Missao da Vera
+
 Special thanks to
 
 * Marlon Brandão de Sousa - Brazilian Portuguese translation
