@@ -122,8 +122,6 @@ If you want to contribute or translate this addon, please access the [project re
 
 ## Contributors
 
-*Brian Missao da Vera
-
 Special thanks to
 
 * Marlon Brandão de Sousa - Brazilian Portuguese translation
@@ -131,5 +129,9 @@ Special thanks to
 * Rémy Ruiz - French translation
 * Ângelo Miguel Abrantes - Portuguese translation
 * Rémy Ruiz - Spanish translation
+<<<<<<< HEAD
 * Umut KORKMAZ - Turkish translation
 *Brian Missao da Vera - NVDA 2022.1 compatibility
+=======
+*Brian Missao da Vera - Minimum version update to work on NVDA-2022.1
+>>>>>>> 46ad662... readme file fixes
