@@ -129,4 +129,4 @@ Special thanks to
 * Rémy Ruiz - French translation
 * Ângelo Miguel Abrantes - Portuguese translation
 * Rémy Ruiz - Spanish translation
-*Brian Missao da Vera - Minimum version update to work on NVDA-2022.1
+*Brian Missao da Vera - NVDA 2022.1 compatibility

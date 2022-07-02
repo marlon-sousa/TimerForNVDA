@@ -132,3 +132,4 @@ Agradecimientos especiales a
 * Tarik Hadžirović - Traducción Croata
 * Rémy Ruiz - Traducción Francés
 * Rémy Ruiz - Traducción Español
+* Brian Missao da Vera - Compatibilidad con NVDA 2022.1
