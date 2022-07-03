@@ -132,4 +132,5 @@ Agradecimentos a:
 * Tarik Hadžirović - Tradução para Croata
 * Rémy Ruiz - Tradução para Francês
 * Rémy Ruiz - Tradução para Espanhol
+* Umut KORKMAZ - tradução para Turco
 * Brian Missao da Vera - Compatibilidade com NVDA 2022.1
