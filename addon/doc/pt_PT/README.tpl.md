@@ -8,7 +8,7 @@ Baixe o [extra temporizador e cronómetro simples para NVDA ${addon_version}](${
 
 ## Temporizadores e cronómetros
 
-Um temporizador inicia uma contagem regressiva a partir de um tempo inicial eterminado.
+Um temporizador inicia uma contagem regressiva a partir de um tempo inicial determinado.
 
 Um cronómetro inicia uma contagem a partir do 0 e continua até que seja instruído a parar. Quando isso acontece, o tempo total é mostrado.
 
@@ -132,3 +132,4 @@ Agradecimentos a:
 * Tarik Hadžirović - Tradução para Croata
 * Rémy Ruiz - Tradução para Francês
 * Rémy Ruiz - Tradução para Espanhol
+* Brian Missao da Vera - Compatibilidade com NVDA 2022.1
