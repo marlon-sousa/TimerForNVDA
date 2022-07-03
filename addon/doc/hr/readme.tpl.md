@@ -129,4 +129,5 @@ Posebno zahvaljujemo
 * Tarik Hadžirović - hrvatski prijevod
 * Rémy Ruiz - francuski prijevod
 * Rémy Ruiz - španjolski prijevod
+* Umut KORKMAZ - turski prijevod
 * Brian Missao da Vera - NVDA 2022.1 kompatibilnost
