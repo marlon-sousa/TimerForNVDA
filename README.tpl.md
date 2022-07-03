@@ -130,4 +130,4 @@ Special thanks to
 * Ângelo Miguel Abrantes - Portuguese translation
 * Rémy Ruiz - Spanish translation
 * Umut KORKMAZ - Turkish translation
-*Brian Missao da Vera - NVDA 2022.1 compatibility
+* Brian Missao da Vera - NVDA 2022.1 compatibility

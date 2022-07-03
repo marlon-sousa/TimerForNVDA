@@ -133,3 +133,4 @@ Eklentiyi çevirmeye veya geliştirmeye yardımcı olmak istiyorsanız, lütfen 
 * Rémy Ruiz - Fransızca Çeviri
 * Remy Ruiz - İspanyolca Çeviri
 * Umut KORKMAZ - Türkçe çeviri
+* Brian Missao da Vera - NVDA 2022.1 uyumluluğu
