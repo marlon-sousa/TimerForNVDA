@@ -1,9 +1,9 @@
-# Timer for NVDA 1.5.0
+# Timer for NVDA 1.5.1
 Brings timer and stopwatch functionalities right to NVDA
 
 ## download
 
-Download the [ Simple Timer and stopwatch for NVDA 1.5.0 addon](https://github.com/marlon-sousa/TimerForNVDA/releases/download/1.5.0/TimerForNVDA-1.5.0.nvda-addon)
+Download the [ Simple Timer and stopwatch for NVDA 1.5.1 addon](https://github.com/marlon-sousa/TimerForNVDA/releases/download/1.5.1/TimerForNVDA-1.5.1.nvda-addon)
 
 ## timers and stopwatches
 
@@ -130,4 +130,4 @@ Special thanks to
 * Ângelo Miguel Abrantes - Portuguese translation
 * Rémy Ruiz - Spanish translation
 * Umut KORKMAZ - Turkish translation
-*Brian Missao da Vera - NVDA 2022.1 compatibility
+* Brian Missao da Vera - NVDA 2022.1 compatibility
