@@ -124,11 +124,11 @@
 
 Особлива подяка
 
-* Marlon Brandão за Sousa - Brazilian Portuguese translation
-* Tarik Hadžirović - Croatian translation
-* Rémy Ruiz - French translation
-* Ângelo Miguel Abrantes - Portuguese translation
-* Rémy Ruiz - Spanish translation
-* Umut KORKMAZ - Turkish translation
-* Heorhii - Ukrainian translation
+* Marlon Brandão за Sousa - бразильський (португальський) переклад
+* Tarik Hadžirović - хорватський переклад
+* Rémy Ruiz - французький переклад
+* Ângelo Miguel Abrantes - португальський переклад
+* Rémy Ruiz - іспанський переклад
+* Umut KORKMAZ - турецький переклад
+* Heorhii - український переклад
 * Brian Missao da Vera - NVDA 2022.1 compatibility
