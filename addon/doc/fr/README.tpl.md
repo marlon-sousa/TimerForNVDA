@@ -133,4 +133,5 @@ Remerciement spécial à
 * Rémy Ruiz - Traduction Français
 * Rémy Ruiz - Traduction Espagnol
 * Umut KORKMAZ - Traduction turc
+* Heorhii - Traduction ukrainienne
 * Brian Missao da Vera - Compatibilité NVDA 2022.1
