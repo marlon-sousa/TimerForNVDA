@@ -130,5 +130,6 @@ Special thanks to
 * Ângelo Miguel Abrantes - Portuguese translation
 * Rémy Ruiz - Spanish translation
 * Umut KORKMAZ - Turkish translation
+* Danil Kostenkov - Russian translation
 * Heorhii - Ukrainian translation
 * Brian Missao da Vera - NVDA 2022.1 compatibility
