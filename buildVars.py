@@ -25,7 +25,7 @@ Choose between speech, sound or no reporters.
 Monitor progress through reporters, settings dialog or anywhere using NVDA commands.
 Control timer and stopwatch from anywhere using NVDA commands."""),
     # version
-    "addon_version": "1.6.1",
+    "addon_version": "1.6.2",
     # Author(s)
     "addon_author": u"Marlon Brandão de Sousa <marlon.bsousa@gmail.com>",
     # URL for the add-on documentation support
