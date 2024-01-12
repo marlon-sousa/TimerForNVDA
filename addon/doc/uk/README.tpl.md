@@ -130,5 +130,6 @@
 * Ângelo Miguel Abrantes - португальський переклад
 * Rémy Ruiz - іспанський переклад
 * Umut KORKMAZ - турецький переклад
+* Danil Kostenkov - Російський переклад
 * Heorhii - український переклад
 * Brian Missao da Vera - NVDA 2022.1 compatibility
