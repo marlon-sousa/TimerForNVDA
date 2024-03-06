@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: TimerForNVDA 1.0.0\n"
 "Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
 "POT-Creation-Date: 2021-02-13 19:25+0100\n"
-"PO-Revision-Date: 2021-12-27 14:23+0100\n"
+"PO-Revision-Date: 2024-03-06 13:12+0300\n"
 "Last-Translator: Tarik Hadžirović <tarik.hadzirovic.official@gmail.com>\n"
 "Language-Team: Tarik Hadžirović <tarik.hadzirovic.official@gmail.com>\n"
 "Language: hr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:25
 msgid "Timer for NVDA settings"
@@ -67,12 +67,12 @@ msgstr "Vrsta sata"
 #. Translators: start button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:73
 msgid "start"
-msgstr "Pokreni"
+msgstr "pokreni"
 
 #. Translators: stop button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:76
 msgid "stop"
-msgstr "Zaustavi"
+msgstr "zaustavi"
 
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:80
 msgid "Report progress with sound"
@@ -99,12 +99,12 @@ msgstr "za"
 #. Translators: timer
 #: addon\globalPlugins\TimerForNVDA\timer.py:23
 msgid "timer"
-msgstr "Brojač"
+msgstr "brojač"
 
 #. Translators: stop watch
 #: addon\globalPlugins\TimerForNVDA\timer.py:25
 msgid "stopwatch"
-msgstr "Štoperica"
+msgstr "štoperica"
 
 #. Translators: can not pause
 #: addon\globalPlugins\TimerForNVDA\timer.py:119
@@ -129,7 +129,7 @@ msgstr "jer nije pauzirano"
 #. Translators: initial time not configured. Start aborted
 #: addon\globalPlugins\TimerForNVDA\timer.py:171
 msgid "Initial time not configured. start aborted"
-msgstr "Početno vrijeme nije konfigurirano."
+msgstr "Početno vrijeme nije konfigurirano. lansiranje je prekinuto"
 
 #. Translators: could not normalize time
 #: addon\globalPlugins\TimerForNVDA\timer.py:187
@@ -149,17 +149,17 @@ msgstr "u"
 #. Translators: paused
 #: addon\globalPlugins\TimerForNVDA\timer.py:396
 msgid " (paused)"
-msgstr "Pauzirano"
+msgstr " (pauzirano)"
 
 #. translators: elapsed
 #: addon\globalPlugins\TimerForNVDA\timer.py:398
 msgid "elapsed"
-msgstr "Proteklo"
+msgstr "proteklo"
 
 #. Translators: to finish
 #: addon\globalPlugins\TimerForNVDA\timer.py:400
 msgid "to finish"
-msgstr "Završiti"
+msgstr "završiti"
 
 #. Translators: stopwatch
 #: addon\globalPlugins\TimerForNVDA\types.py:16

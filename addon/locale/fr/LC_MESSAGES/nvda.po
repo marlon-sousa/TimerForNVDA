@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: TimerForNVDA 1.0.0\n"
 "Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
 "POT-Creation-Date: 2021-02-13 07:28-0300\n"
-"PO-Revision-Date: 2021-02-13 22:36+0100\n"
+"PO-Revision-Date: 2024-03-06 13:14+0300\n"
 "Last-Translator: Rémy Ruiz <remyruiz@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.7\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:25
 msgid "Timer for NVDA settings"
@@ -24,8 +24,7 @@ msgstr "Paramètres de la minuterie pour NVDA"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:25
 msgid "Show settings dialog for Timer for NVDA addon"
-msgstr ""
-"Affiche le dialogue de paramètres de la minuterie pour NVDA"
+msgstr "Affiche le dialogue de paramètres de la minuterie pour NVDA"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:37
 msgid "Shows the timer for NVDA settings dialog"
@@ -70,12 +69,12 @@ msgstr "Type d'horloge"
 #. Translators: start button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:73
 msgid "start"
-msgstr "Démarrer"
+msgstr "démarrer"
 
 #. Translators: stop button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:76
 msgid "stop"
-msgstr "Arrêter"
+msgstr "arrêter"
 
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:80
 msgid "Report progress with sound"
@@ -92,7 +91,7 @@ msgstr "Fermer"
 #. Translators: amount of
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:260
 msgid "amount of"
-msgstr "Quantité de"
+msgstr "quantité de"
 
 #. Translators: for
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:262
@@ -152,7 +151,7 @@ msgstr "dans"
 #. Translators: paused
 #: addon\globalPlugins\TimerForNVDA\timer.py:396
 msgid " (paused)"
-msgstr "(en pause)"
+msgstr " (en pause)"
 
 #. translators: elapsed
 #: addon\globalPlugins\TimerForNVDA\timer.py:398

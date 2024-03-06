@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: TimerForNVDA 1.0.0\n"
 "Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
 "POT-Creation-Date: 2021-02-13 07:28-0300\n"
-"PO-Revision-Date: 2021-02-13 07:30-0300\n"
+"PO-Revision-Date: 2024-03-06 13:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:25
 msgid "Timer for NVDA settings"
-msgstr "configurações do complemento Timer para NVDA"
+msgstr "Configurações do complemento Timer para NVDA"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:25
 msgid "Show settings dialog for Timer for NVDA addon"
-msgstr "mostra o diálodo de configurações do complemento Timer para NVDA"
+msgstr "Mostra o diálodo de configurações do complemento Timer para NVDA"
 
 #: addon\globalPlugins\TimerForNVDA\__init__.py:37
 msgid "Shows the timer for NVDA settings dialog"
@@ -67,12 +67,12 @@ msgstr "Tipo de relógio"
 #. Translators: start button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:73
 msgid "start"
-msgstr "Iniciar"
+msgstr "iniciar"
 
 #. Translators: stop button
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:76
 msgid "stop"
-msgstr "Parar"
+msgstr "parar"
 
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:80
 msgid "Report progress with sound"
@@ -89,7 +89,7 @@ msgstr "Fechar"
 #. Translators: amount of
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:260
 msgid "amount of"
-msgstr "Quantidade de"
+msgstr "quantidade de"
 
 #. Translators: for
 #: addon\globalPlugins\TimerForNVDA\guiHelper.py:262
@@ -114,7 +114,7 @@ msgstr "Não foi possível pausar"
 #. Translators: because it is not running
 #: addon\globalPlugins\TimerForNVDA\timer.py:121
 msgid "because it is not running"
-msgstr "Porque ele não está em operação"
+msgstr "porque ele não está em operação"
 
 #. Translators: can not resume
 #: addon\globalPlugins\TimerForNVDA\timer.py:134
@@ -124,7 +124,7 @@ msgstr "Não foi possível continuar"
 #. Translators: because it is not paused
 #: addon\globalPlugins\TimerForNVDA\timer.py:136
 msgid "because it is not paused"
-msgstr "Por que ele não está pausado"
+msgstr "por que ele não está pausado"
 
 #. Translators: initial time not configured. Start aborted
 #: addon\globalPlugins\TimerForNVDA\timer.py:171
@@ -149,7 +149,7 @@ msgstr "em"
 #. Translators: paused
 #: addon\globalPlugins\TimerForNVDA\timer.py:396
 msgid " (paused)"
-msgstr "(pausado)"
+msgstr " (pausado)"
 
 #. translators: elapsed
 #: addon\globalPlugins\TimerForNVDA\timer.py:398
@@ -164,12 +164,12 @@ msgstr "para término"
 #. Translators: stopwatch
 #: addon\globalPlugins\TimerForNVDA\types.py:16
 msgid "Stopwatch"
-msgstr "cronômetro"
+msgstr "Cronômetro"
 
 #. Translators: timer
 #: addon\globalPlugins\TimerForNVDA\types.py:18
 msgid "Timer"
-msgstr "timer"
+msgstr "Timer"
 
 #. Translators: seconds
 #: addon\globalPlugins\TimerForNVDA\types.py:24
