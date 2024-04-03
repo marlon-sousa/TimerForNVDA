@@ -136,3 +136,4 @@ Eklentiyi çevirmeye veya geliştirmeye yardımcı olmak istiyorsanız, lütfen 
 * Danil Kostenkov - Rusça çeviri
 * Heorhii - Ukraynaca çeviri
 * Brian Missao da Vera - NVDA 2022.1 uyumluluğu
+* Edilberto - NVDA 2024.1 uyumluluğu

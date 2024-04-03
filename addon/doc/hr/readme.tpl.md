@@ -133,3 +133,4 @@ Posebno zahvaljujemo
 * Danil Kostenkov - ruski prijevod
 * Heorhii - ukrajinski prijevod
 * Brian Missao da Vera - NVDA 2022.1 kompatibilnost
+* Edilberto Fonseca - NVDA 2024.1 kompatibilnost
