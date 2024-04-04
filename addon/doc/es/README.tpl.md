@@ -136,3 +136,4 @@ Agradecimientos especiales a
 * Danil Kostenkov - Traducción Rusa
 * Heorhii - Traducción ucraniano
 * Brian Missao da Vera - Compatibilidad con NVDA 2022.1
+* Edilberto Fonseca - Compatibilidad con NVDA 2024.1

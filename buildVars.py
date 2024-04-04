@@ -3,7 +3,7 @@
 # Build customizations
 # Change this file instead of sconstruct or manifest files, whenever possible.
 
-# Full getext (please don't change)
+# Full getext (please don' change)
 import os.path
 def _(x): return x
 
@@ -25,7 +25,7 @@ Choose between speech, sound or no reporters.
 Monitor progress through reporters, settings dialog or anywhere using NVDA commands.
 Control timer and stopwatch from anywhere using NVDA commands."""),
     # version
-    "addon_version": "1.6.4",
+    "addon_version": "1.6.5",
     # Author(s)
     "addon_author": u"Marlon Brandão de Sousa <marlon.bsousa@gmail.com>",
     # URL for the add-on documentation support
@@ -35,7 +35,7 @@ Control timer and stopwatch from anywhere using NVDA commands."""),
     # Minimum NVDA version supported (e.g. "2018.3.0", minor version is optional)
     "addon_minimumNVDAVersion": "2022.1",
     # Last NVDA version supported/tested (e.g. "2018.4.0", ideally more recent than minimum version)
-    "addon_lastTestedNVDAVersion": "2023.1",
+    "addon_lastTestedNVDAVersion": "2024.1",
     # Add-on update channel (default is None, denoting stable releases, and for development releases, use "dev"; do not change unless you know what you are doing)
     "addon_updateChannel": None,
 }

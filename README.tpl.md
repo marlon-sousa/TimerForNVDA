@@ -133,3 +133,4 @@ Special thanks to
 * Danil Kostenkov - Russian translation
 * Heorhii - Ukrainian translation
 * Brian Missao da Vera - NVDA 2022.1 compatibility
+* Edilberto Fonseca  - NVDA 2024.1 compatibility
