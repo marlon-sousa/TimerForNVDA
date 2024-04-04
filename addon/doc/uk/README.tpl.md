@@ -132,5 +132,5 @@
 * Umut KORKMAZ - турецький переклад
 * Danil Kostenkov - Російський переклад
 * Heorhii - український переклад
-* Brian Missão da Vera - сумісність з NVDA 2022.1
+* Brian Missao da Vera - сумісність з NVDA 2022.1
 * Едільберто Фонсека - сумісність з NVDA 2024.1
